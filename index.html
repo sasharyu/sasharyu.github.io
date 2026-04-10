@@ -7,332 +7,84 @@
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=EB+Garamond:wght@400;500&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
-      font-family: 'EB Garamond', serif;
-      color: #1a1a1a;
-      background: #ffffff;
-    }
-
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 0 1.5rem;
-    }
-
-    /* Nav */
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 2rem 0 3rem;
-      border-bottom: 0.5px solid #ddd;
-      margin-bottom: 3rem;
-    }
-    .nav-name {
-      font-size: 16px;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
+    body { font-family: 'EB Garamond', serif; color: #1a1a1a; background: #ffffff; }
+    .container { max-width: 900px; margin: 0 auto; padding: 0 1.5rem; }
+    nav { display: flex; justify-content: space-between; align-items: center; padding: 2rem 0 3rem; border-bottom: 0.5px solid #ddd; margin-bottom: 3rem; }
+    .nav-name { font-size: 16px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; }
     .nav-links { display: flex; gap: 2rem; }
-    .nav-links a {
-      font-size: 13px;
-      color: #666;
-      text-decoration: none;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
+    .nav-links a { font-size: 13px; color: #666; text-decoration: none; text-transform: uppercase; letter-spacing: 0.08em; cursor: pointer; }
     .nav-links a:hover { color: #1a1a1a; }
-
-    /* Hero */
     .hero { margin-bottom: 4rem; }
-    .hero h1 {
-      font-family: 'Instrument Serif', serif;
-      font-size: 52px;
-      font-weight: 400;
-      line-height: 1.1;
-    }
-    .hero p {
-      font-size: 18px;
-      color: #666;
-      line-height: 1.7;
-      margin-top: 0.5rem;
-    }
-
-    /* Section label */
-    .section-label {
-      font-size: 11px;
-      color: #888;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      margin-bottom: 1.5rem;
-    }
-
-    /* Project grid */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: #ddd;
-      margin-bottom: 4rem;
-    }
-    .project-card {
-      background: #fff;
-      padding: 1.5rem;
-      cursor: pointer;
-    }
+    .hero h1 { font-family: 'Instrument Serif', serif; font-size: 52px; font-weight: 400; line-height: 1.1; }
+    .hero p { font-size: 18px; color: #666; line-height: 1.7; margin-top: 0.5rem; }
+    .section-label { font-size: 11px; color: #888; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.5rem; }
+    .tab-bar { display: flex; gap: 0; border-bottom: 0.5px solid #ddd; margin-bottom: 3rem; }
+    .tab-btn { font-family: 'EB Garamond', serif; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: #888; background: none; border: none; padding: 0.75rem 1.5rem 0.75rem 0; cursor: pointer; border-bottom: 1.5px solid transparent; margin-bottom: -0.5px; }
+    .tab-btn.active { color: #1a1a1a; border-bottom-color: #1a1a1a; }
+    .tab-btn:hover { color: #1a1a1a; }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: #ddd; margin-bottom: 4rem; }
+    .project-card { background: #fff; padding: 1.5rem; cursor: pointer; }
     .project-card:hover .project-title { text-decoration: underline; }
-    .project-thumb {
-      width: 100%;
-      aspect-ratio: 4/3;
-      background: #f5f5f5;
-      border-radius: 8px;
-      margin-bottom: 1rem;
-      overflow: hidden;
-    }
-    .project-thumb img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.3s ease;
-    }
+    .project-thumb { width: 100%; aspect-ratio: 4/3; background: #f5f5f5; border-radius: 8px; margin-bottom: 1rem; overflow: hidden; }
+    .project-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s ease; }
     .project-card:hover .project-thumb img { transform: scale(1.03); }
-    .project-thumb-placeholder {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 13px;
-      color: #bbb;
-    }
+    .project-thumb-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 13px; color: #bbb; }
     .project-title { font-size: 16px; font-weight: 500; margin-bottom: 4px; }
     .project-tag { font-size: 14px; color: #888; }
-
-    /* About */
-    .about {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-      margin-bottom: 4rem;
-      padding-top: 3rem;
-      border-top: 0.5px solid #ddd;
-    }
-    .about h2 {
-      font-family: 'Instrument Serif', serif;
-      font-size: 32px;
-      font-weight: 400;
-      margin-bottom: 1rem;
-    }
+    .articles-list { margin-bottom: 4rem; }
+    .article-item { display: flex; justify-content: space-between; align-items: baseline; padding: 1rem 0; border-bottom: 0.5px solid #eee; gap: 1rem; }
+    .article-item:first-child { border-top: 0.5px solid #eee; }
+    .article-link { font-size: 16px; color: #1a1a1a; text-decoration: none; line-height: 1.5; flex: 1; }
+    .article-link:hover { text-decoration: underline; }
+    .article-pub { font-size: 12px; color: #aaa; letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap; flex-shrink: 0; }
+    .about { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 4rem; }
+    .about h2 { font-family: 'Instrument Serif', serif; font-size: 32px; font-weight: 400; margin-bottom: 1rem; }
     .about p { font-size: 16px; color: #555; line-height: 1.7; margin-bottom: 1rem; }
-
     .skills-wrap { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 0.5rem; }
-    .badge {
-      display: inline-block;
-      font-size: 12px;
-      padding: 4px 10px;
-      background: #f2f2f2;
-      border-radius: 99px;
-      color: #555;
-      font-family: 'EB Garamond', serif;
-    }
-
-    /* Contact */
-    .contact {
-      padding-top: 3rem;
-      border-top: 0.5px solid #ddd;
-      margin-bottom: 3rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-    }
-    .contact h2 {
-      font-family: 'Instrument Serif', serif;
-      font-size: 32px;
-      font-weight: 400;
-      margin-bottom: 0.5rem;
-    }
-    .contact p { font-size: 16px; color: #666; }
-    .contact-link { font-size: 16px; color: #1a1a1a; text-decoration: underline; }
-    .contact-link:hover { color: #555; }
-
-    /* Footer */
-    footer {
-      padding: 2rem 0;
-      font-size: 13px;
-      color: #aaa;
-      display: flex;
-      justify-content: space-between;
-      border-top: 0.5px solid #ddd;
-    }
-
-    /* ── Lightbox ── */
-    .lightbox {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.92);
-      z-index: 1000;
-      flex-direction: column;
-    }
+    .badge { display: inline-block; font-size: 12px; padding: 4px 10px; background: #f2f2f2; border-radius: 99px; color: #555; font-family: 'EB Garamond', serif; }
+    .social-links { display: flex; gap: 10px; margin-top: 1.5rem; flex-wrap: wrap; }
+    .social-btn { display: inline-flex; align-items: center; gap: 6px; font-family: 'EB Garamond', serif; font-size: 14px; padding: 7px 16px; border: 0.5px solid #ccc; border-radius: 99px; text-decoration: none; color: #1a1a1a; transition: background 0.2s, border-color 0.2s; }
+    .social-btn:hover { background: #f5f5f5; border-color: #aaa; }
+    .social-btn svg { width: 14px; height: 14px; flex-shrink: 0; }
+    footer { padding: 2rem 0; font-size: 13px; color: #aaa; display: flex; justify-content: space-between; border-top: 0.5px solid #ddd; margin-top: 2rem; }
+    .lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 1000; flex-direction: column; }
     .lightbox.open { display: flex; }
-
-    .lightbox-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.25rem 2rem;
-      border-bottom: 0.5px solid rgba(255,255,255,0.12);
-      flex-shrink: 0;
-    }
-    .lightbox-project-title {
-      font-family: 'Instrument Serif', serif;
-      font-size: 22px;
-      color: #fff;
-      font-weight: 400;
-    }
-    .lightbox-close {
-      background: none;
-      border: none;
-      color: #fff;
-      font-size: 28px;
-      cursor: pointer;
-      line-height: 1;
-      opacity: 0.7;
-      padding: 0 0.25rem;
-    }
+    .lightbox-header { display: flex; justify-content: space-between; align-items: center; padding: 1.25rem 2rem; border-bottom: 0.5px solid rgba(255,255,255,0.12); flex-shrink: 0; }
+    .lightbox-project-title { font-family: 'Instrument Serif', serif; font-size: 22px; color: #fff; font-weight: 400; }
+    .lightbox-close { background: none; border: none; color: #fff; font-size: 28px; cursor: pointer; opacity: 0.7; padding: 0 0.25rem; }
     .lightbox-close:hover { opacity: 1; }
-
-    .lightbox-stage {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-      padding: 2rem 5rem;
-    }
-    .lightbox-img-wrap {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .lightbox-img-wrap img {
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: contain;
-      border-radius: 4px;
-    }
-    .lightbox-img-placeholder {
-      width: 100%;
-      max-width: 640px;
-      aspect-ratio: 4/3;
-      background: #222;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #555;
-      font-size: 15px;
-      font-family: 'EB Garamond', serif;
-    }
-
-    .lightbox-arrow {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: none;
-      border: 0.5px solid rgba(255,255,255,0.2);
-      color: #fff;
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      font-size: 20px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.2s;
-    }
+    .lightbox-stage { flex: 1; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; padding: 2rem 5rem; }
+    .lightbox-img-wrap { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+    .lightbox-img-wrap img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 4px; }
+    .lightbox-img-placeholder { width: 100%; max-width: 640px; aspect-ratio: 4/3; background: #222; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #555; font-size: 15px; font-family: 'EB Garamond', serif; }
+    .lightbox-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: none; border: 0.5px solid rgba(255,255,255,0.2); color: #fff; width: 44px; height: 44px; border-radius: 50%; font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
     .lightbox-arrow:hover { background: rgba(255,255,255,0.1); }
     .lightbox-arrow.prev { left: 1.25rem; }
     .lightbox-arrow.next { right: 1.25rem; }
     .lightbox-arrow:disabled { opacity: 0.2; cursor: default; }
-
-    .lightbox-dots {
-      display: flex;
-      gap: 6px;
-      justify-content: center;
-      padding: 0.5rem 0;
-      flex-shrink: 0;
-    }
-    .dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.2);
-      cursor: pointer;
-      transition: background 0.2s;
-    }
+    .lightbox-dots { display: flex; gap: 6px; justify-content: center; padding: 0.5rem 0; flex-shrink: 0; }
+    .dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.2); cursor: pointer; transition: background 0.2s; }
     .dot.active { background: #fff; }
-
-    .lightbox-footer {
-      flex-shrink: 0;
-      padding: 0.75rem 2rem 1.5rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-    }
+    .lightbox-footer { flex-shrink: 0; padding: 0.75rem 2rem 1.5rem; display: flex; justify-content: space-between; align-items: flex-end; }
     .lightbox-slide-info { max-width: 60%; }
-    .lightbox-slide-title {
-      font-family: 'EB Garamond', serif;
-      font-size: 17px;
-      font-weight: 500;
-      color: #fff;
-      margin-bottom: 4px;
-    }
-    .lightbox-slide-desc {
-      font-family: 'EB Garamond', serif;
-      font-size: 15px;
-      color: rgba(255,255,255,0.55);
-      line-height: 1.6;
-    }
-    .lightbox-counter {
-      font-family: 'EB Garamond', serif;
-      font-size: 14px;
-      color: rgba(255,255,255,0.4);
-      white-space: nowrap;
-    }
-
-    /* Responsive */
-    @media (max-width: 700px) {
-      .grid { grid-template-columns: 1fr 1fr; }
-      .about { grid-template-columns: 1fr; }
-      .contact { flex-direction: column; gap: 1.5rem; align-items: flex-start; }
-      .lightbox-stage { padding: 1rem 3.5rem; }
-      .lightbox-arrow.prev { left: 0.5rem; }
-      .lightbox-arrow.next { right: 0.5rem; }
-    }
-    @media (max-width: 480px) {
-      .grid { grid-template-columns: 1fr; }
-      .hero h1 { font-size: 36px; }
-    }
+    .lightbox-slide-title { font-family: 'EB Garamond', serif; font-size: 17px; font-weight: 500; color: #fff; margin-bottom: 4px; }
+    .lightbox-slide-desc { font-family: 'EB Garamond', serif; font-size: 15px; color: rgba(255,255,255,0.55); line-height: 1.6; }
+    .lightbox-counter { font-family: 'EB Garamond', serif; font-size: 14px; color: rgba(255,255,255,0.4); white-space: nowrap; }
+    @media (max-width: 700px) { .grid { grid-template-columns: 1fr 1fr; } .about { grid-template-columns: 1fr; } .lightbox-stage { padding: 1rem 3.5rem; } .lightbox-arrow.prev { left: 0.5rem; } .lightbox-arrow.next { right: 0.5rem; } }
+    @media (max-width: 480px) { .grid { grid-template-columns: 1fr; } .hero h1 { font-size: 36px; } }
   </style>
 </head>
 <body>
-
 <div class="container">
 
   <nav>
     <span class="nav-name">Sasha Ryu</span>
     <div class="nav-links">
-      <a href="#work">Work</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
+      <a onclick="switchTab('work')">Work</a>
+      <a onclick="switchTab('articles')">Articles</a>
+      <a onclick="switchTab('about')">About</a>
     </div>
   </nav>
 
@@ -341,120 +93,126 @@
     <p>Graphic design portfolio.</p>
   </section>
 
-  <p class="section-label">Selected work</p>
-
-  <!--
-    HOW TO ADD YOUR IMAGES & SLIDES:
-    ─────────────────────────────────
-    Each project card has a data-project attribute containing a JSON array of slides.
-    Each slide looks like this:
-      { "img": "images/myfile.jpg", "title": "Slide title", "desc": "Short description." }
-
-    To add your cover image (shown in the grid), replace the placeholder div with:
-      <img src="images/myfile.jpg" alt="Project name">
-
-    Put all your images in an "images" folder next to index.html on GitHub.
-    You can add as many slides per project as you like.
-  -->
-
-  <div class="grid" id="work">
-
-    <div class="project-card" onclick="openLightbox(this)" data-project='[
-      {"img": "", "title": "Initial concept", "desc": "Brief overview of the project goals and early direction."},
-      {"img": "", "title": "Moodboard", "desc": "Visual references and tone-setting for the brand."},
-      {"img": "", "title": "Final logo", "desc": "The finished mark, refined and ready for use."}
-    ]'>
-      <div class="project-thumb">
-        <div class="project-thumb-placeholder">Your image here</div>
-      </div>
-      <p class="project-title">Project title</p>
-      <p class="project-tag">Brand identity</p>
-    </div>
-
-    <div class="project-card" onclick="openLightbox(this)" data-project='[
-      {"img": "", "title": "Poster concept", "desc": "Early sketches and layout exploration."},
-      {"img": "", "title": "Final poster", "desc": "Finished artwork, print-ready at A2."}
-    ]'>
-      <div class="project-thumb">
-        <div class="project-thumb-placeholder">Your image here</div>
-      </div>
-      <p class="project-title">Project title</p>
-      <p class="project-tag">Poster design</p>
-    </div>
-
-    <div class="project-card" onclick="openLightbox(this)" data-project='[
-      {"img": "", "title": "Packaging design", "desc": "Structural dieline and surface graphics."},
-      {"img": "", "title": "Mockup", "desc": "3D render showing the design in context."}
-    ]'>
-      <div class="project-thumb">
-        <div class="project-thumb-placeholder">Your image here</div>
-      </div>
-      <p class="project-title">Project title</p>
-      <p class="project-tag">Packaging</p>
-    </div>
-
-    <div class="project-card" onclick="openLightbox(this)" data-project='[
-      {"img": "", "title": "Spread one", "desc": "Opening feature spread."},
-      {"img": "", "title": "Spread two", "desc": "Body copy layout with pull quotes."},
-      {"img": "", "title": "Spread three", "desc": "Closing full-bleed image."}
-    ]'>
-      <div class="project-thumb">
-        <div class="project-thumb-placeholder">Your image here</div>
-      </div>
-      <p class="project-title">Project title</p>
-      <p class="project-tag">Editorial</p>
-    </div>
-
-    <div class="project-card" onclick="openLightbox(this)" data-project='[
-      {"img": "", "title": "Type specimen", "desc": "Exploring weight, scale, and spacing."},
-      {"img": "", "title": "Applied typography", "desc": "The typeface in use across a printed piece."}
-    ]'>
-      <div class="project-thumb">
-        <div class="project-thumb-placeholder">Your image here</div>
-      </div>
-      <p class="project-title">Project title</p>
-      <p class="project-tag">Typography</p>
-    </div>
-
-    <div class="project-card" onclick="openLightbox(this)" data-project='[
-      {"img": "", "title": "Homepage", "desc": "Desktop layout for the main landing page."},
-      {"img": "", "title": "Mobile view", "desc": "Responsive design at 375px."}
-    ]'>
-      <div class="project-thumb">
-        <div class="project-thumb-placeholder">Your image here</div>
-      </div>
-      <p class="project-title">Project title</p>
-      <p class="project-tag">Digital</p>
-    </div>
-
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTab('work')">Work</button>
+    <button class="tab-btn" onclick="switchTab('articles')">Articles</button>
+    <button class="tab-btn" onclick="switchTab('about')">About</button>
   </div>
 
-  <div class="about" id="about">
-    <div>
-      <h2>About</h2>
-      <p>Hi, I'm Sasha — a graphic designer with a focus on thoughtful, purposeful design. I work with brands, studios, and individuals to create visual identities, print materials, and digital experiences that feel considered and lasting.</p>
-      <p>I'm currently available for freelance projects and open to full-time roles.</p>
-    </div>
-    <div>
-      <p class="section-label" style="margin-bottom: 1rem;">Skills</p>
-      <div class="skills-wrap">
-        <span class="badge">Figma</span>
-        <span class="badge">InDesign</span>
-        <span class="badge">Photoshop</span>
-        <span class="badge">Premiere Pro</span>
-        <span class="badge">Lightroom</span>
-        <span class="badge">Photography</span>
-        <span class="badge">Videography</span>
+  <!-- Work tab -->
+  <div class="tab-panel active" id="tab-work">
+    <div class="grid">
+      <div class="project-card" onclick="openLightbox(this)" data-project='[{"img":"","title":"Initial concept","desc":"Brief overview of the project goals and early direction."},{"img":"","title":"Moodboard","desc":"Visual references and tone-setting for the brand."},{"img":"","title":"Final logo","desc":"The finished mark, refined and ready for use."}]'>
+        <div class="project-thumb"><div class="project-thumb-placeholder">Your image here</div></div>
+        <p class="project-title">Project title</p><p class="project-tag">Brand identity</p>
+      </div>
+      <div class="project-card" onclick="openLightbox(this)" data-project='[{"img":"","title":"Poster concept","desc":"Early sketches and layout exploration."},{"img":"","title":"Final poster","desc":"Finished artwork, print-ready at A2."}]'>
+        <div class="project-thumb"><div class="project-thumb-placeholder">Your image here</div></div>
+        <p class="project-title">Project title</p><p class="project-tag">Poster design</p>
+      </div>
+      <div class="project-card" onclick="openLightbox(this)" data-project='[{"img":"","title":"Packaging design","desc":"Structural dieline and surface graphics."},{"img":"","title":"Mockup","desc":"3D render showing the design in context."}]'>
+        <div class="project-thumb"><div class="project-thumb-placeholder">Your image here</div></div>
+        <p class="project-title">Project title</p><p class="project-tag">Packaging</p>
+      </div>
+      <div class="project-card" onclick="openLightbox(this)" data-project='[{"img":"","title":"Spread one","desc":"Opening feature spread."},{"img":"","title":"Spread two","desc":"Body copy layout with pull quotes."},{"img":"","title":"Spread three","desc":"Closing full-bleed image."}]'>
+        <div class="project-thumb"><div class="project-thumb-placeholder">Your image here</div></div>
+        <p class="project-title">Project title</p><p class="project-tag">Editorial</p>
+      </div>
+      <div class="project-card" onclick="openLightbox(this)" data-project='[{"img":"","title":"Type specimen","desc":"Exploring weight, scale, and spacing."},{"img":"","title":"Applied typography","desc":"The typeface in use across a printed piece."}]'>
+        <div class="project-thumb"><div class="project-thumb-placeholder">Your image here</div></div>
+        <p class="project-title">Project title</p><p class="project-tag">Typography</p>
+      </div>
+      <div class="project-card" onclick="openLightbox(this)" data-project='[{"img":"","title":"Homepage","desc":"Desktop layout for the main landing page."},{"img":"","title":"Mobile view","desc":"Responsive design at 375px."}]'>
+        <div class="project-thumb"><div class="project-thumb-placeholder">Your image here</div></div>
+        <p class="project-title">Project title</p><p class="project-tag">Digital</p>
       </div>
     </div>
   </div>
 
-  <div class="contact" id="contact">
-    <div>
-      <h2>Let's work together</h2>
-      <p>Open to freelance, contracts, and full-time roles.</p>
+  <!-- Articles tab -->
+  <div class="tab-panel" id="tab-articles">
+    <div class="articles-list">
+      <div class="article-item"><a class="article-link" href="https://www.uscannenbergmedia.com/2026/04/06/families-left-in-the-dark-ucsd-usc-quietly-sell-donors-bodies-to-navy-for-israeli-military-training/" target="_blank">Families left in the dark: UCSD, USC quietly sell donors' bodies to Navy for Israeli military training</a><span class="article-pub">Annenberg Media</span></div>
+      <div class="article-item"><a class="article-link" href="https://www.uscannenbergmedia.com/2026/02/18/usc-navy-program-appears-linked-to-specific-israeli-brigade-that-massacred-paramedics-photo-shows/" target="_blank">USC Navy program appears linked to specific Israeli brigade that massacred paramedics, photo shows</a><span class="article-pub">Annenberg Media</span></div>
+      <div class="article-item"><a class="article-link" href="https://www.uscannenbergmedia.com/2026/01/25/usc-navy-extend-contract-to-provide-cadavers-to-idf-for-training/" target="_blank">USC, Navy extend contract to provide cadavers to IDF for training</a><span class="article-pub">Annenberg Media</span></div>
+      <div class="article-item"><a class="article-link" href="https://dailytrojan.com/2024/06/26/usc-student-will-not-be-charged-in-fatal-stabbing-of-unhoused-carjacking-suspect/" target="_blank">USC student will not be charged in fatal stabbing of unhoused carjacking suspect</a><span class="article-pub">Daily Trojan</span></div>
+      <div class="article-item"><a class="article-link" href="https://dailytrojan.com/2024/06/24/sda-mfa-programs-to-be-tuition-free/" target="_blank">SDA MFA programs to be tuition-free</a><span class="article-pub">Daily Trojan</span></div>
+      <div class="article-item"><a class="article-link" href="https://dailytrojan.com/2024/06/20/usc-student-will-not-be-charged-in-fatal-stabbing/" target="_blank">USC student will not be charged in fatal stabbing</a><span class="article-pub">Daily Trojan</span></div>
+      <div class="article-item"><a class="article-link" href="https://dailytrojan.com/2024/06/12/university-releases-preliminary-culture-survey-results/" target="_blank">University releases preliminary culture survey results</a><span class="article-pub">Daily Trojan</span></div>
+      <div class="article-item"><a class="article-link" href="https://dailytrojan.com/2024/06/05/usc-celebrates-the-beginning-of-pride-month-over-zoom/" target="_blank">USC celebrates the beginning of Pride Month over Zoom</a><span class="article-pub">Daily Trojan</span></div>
+      <div class="article-item"><a class="article-link" href="https://dailytrojan.com/2024/05/29/jewish-students-discuss-incidents-of-antisemitism-harassment-on-campus/" target="_blank">Jewish students discuss incidents of antisemitism, harassment on campus</a><span class="article-pub">Daily Trojan</span></div>
+      <div class="article-item"><a class="article-link" href="https://dailytrojan.com/2024/05/14/the-show-must-go-on-graduates-celebrate-without-main-ceremony/" target="_blank">The show must go on: Graduates celebrate without main ceremony</a><span class="article-pub">Daily Trojan</span></div>
+      <div class="article-item"><a class="article-link" href="https://dailytrojan.com/2024/05/12/community-protests-pomona-college-commencement-at-shrine-auditorium/" target="_blank">Community protests Pomona College commencement at Shrine Auditorium</a><span class="article-pub">Daily Trojan</span></div>
+      <div class="article-item"><a class="article-link" href="https://dailytrojan.com/2024/05/01/lapd-dps-clear-gaza-solidarity-occupation-at-usc-as-it-happened/" target="_blank">LAPD, DPS clear Gaza solidarity occupation at USC — as it happened</a><span class="article-pub">Daily Trojan</span></div>
+      <div class="article-item"><a class="article-link" href="https://dailytrojan.com/2024/04/27/gaza-solidarity-occupation-at-usc-continues-after-police-shutdown-live-updates/" target="_blank">Gaza solidarity occupation at USC continues after police shutdown — live updates</a><span class="article-pub">Daily Trojan</span></div>
+      <div class="article-item"><a class="article-link" href="https://dailytrojan.com/2024/04/25/the-initial-gaza-solidarity-occupation-at-usc-and-the-aftermath-as-it-happened/" target="_blank">The initial Gaza solidarity occupation at USC and the aftermath — as it happened</a><span class="article-pub">Daily Trojan</span></div>
+      <div class="article-item"><a class="article-link" href="https://dailytrojan.com/2024/04/15/valedictorian-will-not-speak-at-class-of-2024-commencement/" target="_blank">Valedictorian will not speak at Class of 2024 commencement</a><span class="article-pub">Daily Trojan</span></div>
+      <div class="article-item"><a class="article-link" href="https://dailytrojan.com/2024/03/25/usc-reinstates-academic-achievement-award-exceptional-funding/" target="_blank">USC reinstates academic achievement award, exceptional funding</a><span class="article-pub">Daily Trojan</span></div>
+      <div class="article-item"><a class="article-link" href="https://dailytrojan.com/2024/02/27/campus-voting-initiatives-ramp-up-for-primaries/" target="_blank">Campus voting initiatives ramp up for primaries</a><span class="article-pub">Daily Trojan</span></div>
+      <div class="article-item"><a class="article-link" href="https://dailytrojan.com/2024/02/16/dacity-nunis-drops-out-of-usg-presidential-election/" target="_blank">Dacity Nunis drops out of USG presidential election</a><span class="article-pub">Daily Trojan</span></div>
+      <div class="article-item"><a class="article-link" href="https://dailytrojan.com/2024/02/06/founding-director-of-usc-games-sued-for-sexual-harassment/" target="_blank">Founding director of USC Games sued for sexual harassment</a><span class="article-pub">Daily Trojan</span></div>
+      <div class="article-item"><a class="article-link" href="https://dailytrojan.com/2023/12/17/annenberg-professor-doxxed-following-comments-on-hamas/" target="_blank">Annenberg professor doxxed following comments on Hamas</a><span class="article-pub">Daily Trojan</span></div>
+      <div class="article-item"><a class="article-link" href="https://dailytrojan.com/2023/11/30/usc-investigating-prominent-neuroscientist/" target="_blank">USC investigating prominent neuroscientist</a><span class="article-pub">Daily Trojan</span></div>
+      <div class="article-item"><a class="article-link" href="https://dailytrojan.com/2023/11/16/panel-discusses-aftermath-in-artsakh/" target="_blank">Panel discusses aftermath in Artsakh</a><span class="article-pub">Daily Trojan</span></div>
+      <div class="article-item"><a class="article-link" href="https://dailytrojan.com/2023/11/09/usc-democrats-republicans-clash-at-student-debate/" target="_blank">USC Democrats, Republicans clash at student debate</a><span class="article-pub">Daily Trojan</span></div>
+      <div class="article-item"><a class="article-link" href="https://dailytrojan.com/2023/11/02/nasa-honors-heritage-with-beaded-jewelry-circle/" target="_blank">NASA honors heritage with beaded jewelry circle</a><span class="article-pub">Daily Trojan</span></div>
+      <div class="article-item"><a class="article-link" href="https://dailytrojan.com/2023/10/26/expert-panel-discusses-the-implications-of-us-college-admissions-post-affirmative-action/" target="_blank">Expert panel discusses the implications of US college admissions post-affirmative action</a><span class="article-pub">Daily Trojan</span></div>
+      <div class="article-item"><a class="article-link" href="https://dailytrojan.com/2023/10/24/secretary-buttigieg-discusses-future-of-american-politics/" target="_blank">Secretary Buttigieg discusses future of American politics</a><span class="article-pub">Daily Trojan</span></div>
+      <div class="article-item"><a class="article-link" href="https://dailytrojan.com/2022/06/22/on-rent-and-ph-d-stipends-the-push-for-higher-pay/" target="_blank">On rent and Ph.D. stipends, the push for higher pay</a><span class="article-pub">Daily Trojan</span></div>
+      <div class="article-item"><a class="article-link" href="https://dailytrojan.com/2021/12/02/care-not-cops-rally-calls-for-justice-for-love/" target="_blank">Care Not Cops rally calls for justice for Love</a><span class="article-pub">Daily Trojan</span></div>
+      <div class="article-item"><a class="article-link" href="https://dailytrojan.com/2021/11/19/usc-to-posthumously-honor-nisei-alums/" target="_blank">USC to posthumously honor Nisei alums</a><span class="article-pub">Daily Trojan</span></div>
+      <div class="article-item"><a class="article-link" href="https://dailytrojan.com/2021/11/16/freshman-becomes-breakthrough-junior-finalist/" target="_blank">Freshman becomes Breakthrough Junior finalist</a><span class="article-pub">Daily Trojan</span></div>
+      <div class="article-item"><a class="article-link" href="https://dailytrojan.com/2021/10/29/students-recognize-immigrant-day-of-action/" target="_blank">Students recognize Immigrant Day of Action</a><span class="article-pub">Daily Trojan</span></div>
+      <div class="article-item"><a class="article-link" href="https://dailytrojan.com/2021/10/21/students-criticize-first-choice-housing-practices/" target="_blank">Students criticize first-choice housing practices</a><span class="article-pub">Daily Trojan</span></div>
+      <div class="article-item"><a class="article-link" href="https://dailytrojan.com/2021/10/12/parents-facing-trial-for-admissions-scandal/" target="_blank">Parents facing trial for admissions scandal</a><span class="article-pub">Daily Trojan</span></div>
+      <div class="article-item"><a class="article-link" href="https://dailytrojan.com/2021/10/08/usc-dining-halls-and-restaurants-remain-understaffed/" target="_blank">USC dining halls and restaurants remain understaffed</a><span class="article-pub">Daily Trojan</span></div>
+      <div class="article-item"><a class="article-link" href="https://dailytrojan.com/2021/10/07/vaccine-proof-mandate-approved/" target="_blank">Vaccine proof mandate approved</a><span class="article-pub">Daily Trojan</span></div>
+      <div class="article-item"><a class="article-link" href="https://dailytrojan.com/2021/10/01/investigation-finds-usc-destroyed-evidence/" target="_blank">Investigation finds USC destroyed evidence</a><span class="article-pub">Daily Trojan</span></div>
+      <div class="article-item"><a class="article-link" href="https://dailytrojan.com/2021/09/27/community-feels-impacts-of-states-wildfires/" target="_blank">Community feels impacts of state's wildfires</a><span class="article-pub">Daily Trojan</span></div>
+      <div class="article-item"><a class="article-link" href="https://dailytrojan.com/2021/09/22/usg-discusses-expanding-gym-hours-accessibility/" target="_blank">USG discusses expanding gym hours, accessibility</a><span class="article-pub">Daily Trojan</span></div>
+      <div class="article-item"><a class="article-link" href="https://dailytrojan.com/2021/09/21/seminar-explores-argentine-problems/" target="_blank">Seminar explores Argentine problems</a><span class="article-pub">Daily Trojan</span></div>
+      <div class="article-item"><a class="article-link" href="https://dailytrojan.com/2021/09/15/students-and-staff-members-reflect-on-the-20-year-anniversary-of-9-11/" target="_blank">Students and staff members reflect on the 20-year anniversary of 9/11</a><span class="article-pub">Daily Trojan</span></div>
+      <div class="article-item"><a class="article-link" href="https://dailytrojan.com/2021/09/10/community-weighs-in-on-recall-election/" target="_blank">Community weighs in on recall election</a><span class="article-pub">Daily Trojan</span></div>
+      <div class="article-item"><a class="article-link" href="https://dailytrojan.com/2021/09/08/usg-aims-to-create-welcoming-culture/" target="_blank">USG aims to create welcoming culture</a><span class="article-pub">Daily Trojan</span></div>
+      <div class="article-item"><a class="article-link" href="https://dailytrojan.com/2021/09/01/usg-discusses-hybrid-learning-sustainability-initiatives/" target="_blank">USG discusses hybrid learning, sustainability initiatives</a><span class="article-pub">Daily Trojan</span></div>
+      <div class="article-item"><a class="article-link" href="https://dailytrojan.com/2021/08/26/afghan-students-worry-for-family-safety/" target="_blank">Afghan students worry for family safety</a><span class="article-pub">Daily Trojan</span></div>
     </div>
-    <a class="contact-link" href="mailto:sasharyu02@gmail.com">sasharyu02@gmail.com</a>
+  </div>
+
+  <!-- About tab -->
+  <div class="tab-panel" id="tab-about">
+    <div class="about">
+      <div>
+        <h2>About</h2>
+        <p>Hi, I'm Sasha — a multimedia journalist from Los Gatos, California. My love for design traces back to my deep belief in the power of visual storytelling. Please feel free to reach out via Twitter, LinkedIn or email if you'd like to connect!</p>
+        <div class="social-links">
+          <a class="social-btn" href="https://x.com/sasharyu_" target="_blank">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.259 5.63 5.905-5.63Zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            Twitter
+          </a>
+          <a class="social-btn" href="https://www.linkedin.com/in/sasharyu/" target="_blank">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            LinkedIn
+          </a>
+          <a class="social-btn" href="mailto:sasharyu02@gmail.com">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"/></svg>
+            Email
+          </a>
+        </div>
+      </div>
+      <div>
+        <p class="section-label" style="margin-bottom: 1rem;">Skills</p>
+        <div class="skills-wrap">
+          <span class="badge">Figma</span>
+          <span class="badge">InDesign</span>
+          <span class="badge">Photoshop</span>
+          <span class="badge">Premiere Pro</span>
+          <span class="badge">Lightroom</span>
+          <span class="badge">Photography</span>
+          <span class="badge">Videography</span>
+        </div>
+      </div>
+    </div>
   </div>
 
   <footer>
@@ -486,77 +244,46 @@
 </div>
 
 <script>
-  let slides = [];
-  let currentSlide = 0;
-
+  let slides = [], currentSlide = 0;
+  function switchTab(name) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    document.querySelectorAll('.tab-btn').forEach(b => { if (b.textContent.toLowerCase().trim() === name) b.classList.add('active'); });
+  }
   function openLightbox(card) {
     slides = JSON.parse(card.getAttribute('data-project'));
-    const title = card.querySelector('.project-title').textContent;
     currentSlide = 0;
-    document.getElementById('lb-project-title').textContent = title;
-    buildDots();
-    renderSlide();
+    document.getElementById('lb-project-title').textContent = card.querySelector('.project-title').textContent;
+    buildDots(); renderSlide();
     document.getElementById('lightbox').classList.add('open');
     document.body.style.overflow = 'hidden';
   }
-
-  function closeLightbox() {
-    document.getElementById('lightbox').classList.remove('open');
-    document.body.style.overflow = '';
-  }
-
-  function changeSlide(dir) {
-    currentSlide = Math.max(0, Math.min(slides.length - 1, currentSlide + dir));
-    renderSlide();
-  }
-
-  function goToSlide(index) {
-    currentSlide = index;
-    renderSlide();
-  }
-
+  function closeLightbox() { document.getElementById('lightbox').classList.remove('open'); document.body.style.overflow = ''; }
+  function changeSlide(dir) { currentSlide = Math.max(0, Math.min(slides.length - 1, currentSlide + dir)); renderSlide(); }
+  function goToSlide(i) { currentSlide = i; renderSlide(); }
   function renderSlide() {
-    const slide = slides[currentSlide];
+    const s = slides[currentSlide];
     const wrap = document.getElementById('lb-img-wrap');
-
-    if (slide.img) {
-      wrap.innerHTML = '<img src="' + slide.img + '" alt="' + (slide.title || '') + '">';
-    } else {
-      wrap.innerHTML = '<div class="lightbox-img-placeholder">Your image here</div>';
-    }
-
-    document.getElementById('lb-slide-title').textContent = slide.title || '';
-    document.getElementById('lb-slide-desc').textContent = slide.desc || '';
+    wrap.innerHTML = s.img ? '<img src="' + s.img + '" alt="' + (s.title||'') + '">' : '<div class="lightbox-img-placeholder">Your image here</div>';
+    document.getElementById('lb-slide-title').textContent = s.title || '';
+    document.getElementById('lb-slide-desc').textContent = s.desc || '';
     document.getElementById('lb-counter').textContent = (currentSlide + 1) + ' / ' + slides.length;
     document.getElementById('lb-prev').disabled = currentSlide === 0;
     document.getElementById('lb-next').disabled = currentSlide === slides.length - 1;
-
-    document.querySelectorAll('.dot').forEach((d, i) => {
-      d.classList.toggle('active', i === currentSlide);
-    });
+    document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === currentSlide));
   }
-
   function buildDots() {
-    const dotsEl = document.getElementById('lb-dots');
-    dotsEl.innerHTML = '';
-    slides.forEach((_, i) => {
-      const d = document.createElement('span');
-      d.className = 'dot' + (i === 0 ? ' active' : '');
-      d.onclick = () => goToSlide(i);
-      dotsEl.appendChild(d);
-    });
+    const el = document.getElementById('lb-dots'); el.innerHTML = '';
+    slides.forEach((_, i) => { const d = document.createElement('span'); d.className = 'dot' + (i===0?' active':''); d.onclick = () => goToSlide(i); el.appendChild(d); });
   }
-
   document.addEventListener('keydown', e => {
     if (!document.getElementById('lightbox').classList.contains('open')) return;
     if (e.key === 'ArrowRight') changeSlide(1);
     if (e.key === 'ArrowLeft') changeSlide(-1);
     if (e.key === 'Escape') closeLightbox();
   });
-
-  document.getElementById('lightbox').addEventListener('click', e => {
-    if (e.target === document.getElementById('lightbox')) closeLightbox();
-  });
+  document.getElementById('lightbox').addEventListener('click', e => { if (e.target === document.getElementById('lightbox')) closeLightbox(); });
 </script>
 
 </body>
