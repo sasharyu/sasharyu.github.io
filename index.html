@@ -85,6 +85,11 @@
     .lightbox-slide-desc { font-family: 'EB Garamond', serif; font-size: 15px; color: rgba(255,255,255,0.55); line-height: 1.6; }
     .lightbox-counter { font-family: 'EB Garamond', serif; font-size: 14px; color: rgba(255,255,255,0.4); white-space: nowrap; }
 
+    /* Magazine buttons */
+    .mag-btn { font-family: 'EB Garamond', serif; font-size: 13px; padding: 7px 16px; border: 0.5px solid #ccc; border-radius: 99px; background: none; cursor: pointer; color: #666; transition: all 0.2s; }
+    .mag-btn:hover { border-color: #aaa; color: #1a1a1a; }
+    .mag-btn.active { background: #1a1a1a; color: #fff; border-color: #1a1a1a; }
+
     /* Masonry photography grid */
     .masonry-grid { columns: 3; column-gap: 12px; margin-bottom: 4rem; }
     .masonry-item { break-inside: avoid; margin-bottom: 12px; border-radius: 8px; overflow: hidden; cursor: pointer; }
@@ -140,9 +145,33 @@
         <p class="project-title">Pride Month Harm Reduction</p><p class="project-tag">Design</p>
       </div>
     </div>
+    <p class="section-label" style="margin-bottom: 1.5rem;">Magazine</p>
+
+    <!-- Magazine selector -->
+    <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:1.5rem;">
+      <button class="mag-btn active" onclick="loadMag('Summer24.pdf','Summer 2024',this)">Summer 2024</button>
+      <button class="mag-btn" onclick="loadMag('October24.pdf','October 2024',this)">October 2024</button>
+      <button class="mag-btn" onclick="loadMag('November24.pdf','November 2024',this)">November 2024</button>
+      <button class="mag-btn" onclick="loadMag('December24.pdf','December 2024',this)">December 2024</button>
+    </div>
+
+    <!-- Flipbook viewer -->
+    <div id="flipbook-wrap" style="margin-bottom:4rem;">
+      <div id="flipbook-title" style="font-family:'Instrument Serif',serif;font-size:22px;margin-bottom:1rem;">Summer 2024</div>
+      <div style="position:relative;background:#111;border-radius:8px;overflow:hidden;">
+        <canvas id="pdf-canvas" style="display:block;width:100%;height:auto;"></canvas>
+        <div id="pdf-loading" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#aaa;font-family:'EB Garamond',serif;font-size:15px;">Loading...</div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-top:1rem;">
+        <button id="pdf-prev" onclick="changePage(-1)" style="font-family:'EB Garamond',serif;font-size:14px;padding:8px 20px;border:0.5px solid #ccc;border-radius:99px;background:none;cursor:pointer;">← Prev</button>
+        <span id="pdf-counter" style="font-family:'EB Garamond',serif;font-size:14px;color:#888;">Page 1 of 1</span>
+        <button id="pdf-next" onclick="changePage(1)" style="font-family:'EB Garamond',serif;font-size:14px;padding:8px 20px;border:0.5px solid #ccc;border-radius:99px;background:none;cursor:pointer;">Next →</button>
+      </div>
+    </div>
   </div>
 
   <!-- Articles tab -->
+
   <div class="tab-panel" id="tab-articles">
     <div class="articles-grid" id="articles-grid"></div>
   </div>
@@ -353,6 +382,65 @@
     if (e.key === 'Escape') closeLightbox();
   });
   document.getElementById('lightbox').addEventListener('click', e => { if (e.target === document.getElementById('lightbox')) closeLightbox(); });
+</script>
+<!-- PDF.js flipbook -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script>
+  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+  let pdfDoc = null, pageNum = 1, pageRendering = false;
+
+  function loadMag(file, title, btn) {
+    document.querySelectorAll('.mag-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('flipbook-title').textContent = title;
+    pageNum = 1;
+    pdfDoc = null;
+    document.getElementById('pdf-loading').style.display = 'flex';
+    document.getElementById('pdf-canvas').style.display = 'none';
+
+    pdfjsLib.getDocument(file).promise.then(doc => {
+      pdfDoc = doc;
+      document.getElementById('pdf-loading').style.display = 'none';
+      document.getElementById('pdf-canvas').style.display = 'block';
+      renderPage(pageNum);
+    }).catch(() => {
+      document.getElementById('pdf-loading').textContent = 'Could not load PDF.';
+    });
+  }
+
+  function renderPage(num) {
+    if (!pdfDoc || pageRendering) return;
+    pageRendering = true;
+    pdfDoc.getPage(num).then(page => {
+      const canvas = document.getElementById('pdf-canvas');
+      const ctx = canvas.getContext('2d');
+      const viewport = page.getViewport({ scale: window.innerWidth < 600 ? 1.2 : 2 });
+      canvas.width = viewport.width;
+      canvas.height = viewport.height;
+      page.render({ canvasContext: ctx, viewport }).promise.then(() => {
+        pageRendering = false;
+        document.getElementById('pdf-counter').textContent = `Page ${num} of ${pdfDoc.numPages}`;
+        document.getElementById('pdf-prev').disabled = num <= 1;
+        document.getElementById('pdf-next').disabled = num >= pdfDoc.numPages;
+      });
+    });
+  }
+
+  function changePage(dir) {
+    if (!pdfDoc) return;
+    const next = pageNum + dir;
+    if (next < 1 || next > pdfDoc.numPages) return;
+    pageNum = next;
+    renderPage(pageNum);
+  }
+
+  // Auto-load first magazine when design tab is opened
+  const origSwitchTab = window.switchTab;
+  window.addEventListener('DOMContentLoaded', () => {
+    // Load on first visit to design tab
+    loadMag('Summer24.pdf', 'Summer 2024', document.querySelector('.mag-btn.active'));
+  });
 </script>
 </body>
 </html>
