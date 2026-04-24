@@ -90,14 +90,20 @@
     .mag-btn:hover { border-color: #aaa; color: #1a1a1a; }
     .mag-btn.active { background: #1a1a1a; color: #fff; border-color: #1a1a1a; }
 
+    /* Two-column design layout */
+    .design-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 4rem; align-items: start; }
+    .design-left {}
+    .design-right {}
+    .grid-2col { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: #ddd; }
+
     /* Masonry photography grid */
     .masonry-grid { columns: 3; column-gap: 12px; margin-bottom: 4rem; }
     .masonry-item { break-inside: avoid; margin-bottom: 12px; border-radius: 8px; overflow: hidden; cursor: pointer; }
     .masonry-item img { width: 100%; display: block; transition: opacity 0.2s; }
     .masonry-item:hover img { opacity: 0.9; }
 
-    @media (max-width: 700px) { .grid { grid-template-columns: 1fr 1fr; } .articles-grid { grid-template-columns: 1fr 1fr; } .masonry-grid { columns: 2; } .about { grid-template-columns: 1fr; } .lightbox-stage { padding: 1rem 3.5rem; } .lightbox-arrow.prev { left: 0.5rem; } .lightbox-arrow.next { right: 0.5rem; } }
-    @media (max-width: 480px) { .grid { grid-template-columns: 1fr; } .articles-grid { grid-template-columns: 1fr; } .masonry-grid { columns: 1; } .hero h1 { font-size: 36px; } }
+    @media (max-width: 700px) { .grid { grid-template-columns: 1fr 1fr; } .grid-2col { grid-template-columns: 1fr 1fr; } .design-layout { grid-template-columns: 1fr; } .articles-grid { grid-template-columns: 1fr 1fr; } .masonry-grid { columns: 2; } .about { grid-template-columns: 1fr; } .lightbox-stage { padding: 1rem 3.5rem; } .lightbox-arrow.prev { left: 0.5rem; } .lightbox-arrow.next { right: 0.5rem; } }
+    @media (max-width: 480px) { .grid { grid-template-columns: 1fr; } .grid-2col { grid-template-columns: 1fr; } .articles-grid { grid-template-columns: 1fr; } .masonry-grid { columns: 1; } .hero h1 { font-size: 36px; } }
   </style>
 </head>
 <body>
@@ -127,46 +133,51 @@
 
   <!-- design tab -->
   <div class="tab-panel active" id="tab-design">
-    <div class="grid">
-      <div class="project-card" onclick="openLightbox(this)" data-project='[{"img":"images/WEED1.png","title":"","desc":""},{"img":"images/WEED2.png","title":"","desc":""},{"img":"images/WEED3.png","title":"","desc":""},{"img":"images/WEED4.png","title":"","desc":""}]'>
-        <div class="project-thumb"><img src="images/WEED1.png" alt="Canabis+ + Sleep"></div>
-        <p class="project-title">Cannabis + Sleep</p><p class="project-tag">Design</p>
-      </div>
-      <div class="project-card" onclick="openLightbox(this)" data-project='[{"img":"images/MDMA1.png","title":"","desc":""},{"img":"images/MDMA2.png","title":"","desc":""},{"img":"images/MDMA3.png","title":"","desc":""},{"img":"images/MDMA4.png","title":"","desc":""},{"img":"images/MDMA5.png","title":"","desc":""},{"img":"images/MDMA6.png","title":"","desc":""},{"img":"images/MDMA7.png","title":"","desc":""}]'>
-        <div class="project-thumb"><img src="images/MDMA1.png" alt="MDMA + Lifespan"></div>
-        <p class="project-title">MDMA + Lifespan</p><p class="project-tag">Design</p>
-      </div>
-      <div class="project-card" onclick="openLightbox(this)" data-project='[{"img":"images/RockTheRow.png","title":"","desc":""}]'>
-        <div class="project-thumb"><img src="images/RockTheRow.png" alt="Rock the Row"></div>
-        <p class="project-title">Rock the Row</p><p class="project-tag">Design</p>
-      </div>
-      <div class="project-card" onclick="openLightbox(this)" data-project='[{"img":"images/LGBTQ1.png","title":"","desc":""},{"img":"images/LGBTQ2.png","title":"","desc":""},{"img":"images/LGBTQ3.png","title":"","desc":""},{"img":"images/LGBTQ4.png","title":"","desc":""},{"img":"images/LGBTQ5.png","title":"","desc":""}]'>
-        <div class="project-thumb"><img src="images/LGBTQ1.png" alt="Pride Month Harm Reduction"></div>
-        <p class="project-title">Pride Month Harm Reduction</p><p class="project-tag">Design</p>
-      </div>
-    </div>
-    <p class="section-label" style="margin-bottom: 1.5rem;">Magazine</p>
+    <div class="design-layout">
 
-    <!-- Magazine selector -->
-    <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:1.5rem;">
-      <button class="mag-btn active" onclick="loadMag('Summer24.pdf','Summer 2024',this)">Summer 2024</button>
-      <button class="mag-btn" onclick="loadMag('October24.pdf','October 2024',this)">October 2024</button>
-      <button class="mag-btn" onclick="loadMag('November24.pdf','November 2024',this)">November 2024</button>
-      <button class="mag-btn" onclick="loadMag('December24.pdf','December 2024',this)">December 2024</button>
-    </div>
+      <!-- Left: project grid -->
+      <div class="design-left">
+        <div class="grid-2col">
+          <div class="project-card" onclick="openLightbox(this)" data-project='[{"img":"images/WEED1.png","title":"","desc":""},{"img":"images/WEED2.png","title":"","desc":""},{"img":"images/WEED3.png","title":"","desc":""},{"img":"images/WEED4.png","title":"","desc":""}]'>
+            <div class="project-thumb"><img src="images/WEED1.png" alt="Cannabis + Sleep"></div>
+            <p class="project-title">Cannabis + Sleep</p><p class="project-tag">Design</p>
+          </div>
+          <div class="project-card" onclick="openLightbox(this)" data-project='[{"img":"images/MDMA1.png","title":"","desc":""},{"img":"images/MDMA2.png","title":"","desc":""},{"img":"images/MDMA3.png","title":"","desc":""},{"img":"images/MDMA4.png","title":"","desc":""},{"img":"images/MDMA5.png","title":"","desc":""},{"img":"images/MDMA6.png","title":"","desc":""},{"img":"images/MDMA7.png","title":"","desc":""}]'>
+            <div class="project-thumb"><img src="images/MDMA1.png" alt="MDMA + Lifespan"></div>
+            <p class="project-title">MDMA + Lifespan</p><p class="project-tag">Design</p>
+          </div>
+          <div class="project-card" onclick="openLightbox(this)" data-project='[{"img":"images/RockTheRow.png","title":"","desc":""}]'>
+            <div class="project-thumb"><img src="images/RockTheRow.png" alt="Rock the Row"></div>
+            <p class="project-title">Rock the Row</p><p class="project-tag">Design</p>
+          </div>
+          <div class="project-card" onclick="openLightbox(this)" data-project='[{"img":"images/LGBTQ1.png","title":"","desc":""},{"img":"images/LGBTQ2.png","title":"","desc":""},{"img":"images/LGBTQ3.png","title":"","desc":""},{"img":"images/LGBTQ4.png","title":"","desc":""},{"img":"images/LGBTQ5.png","title":"","desc":""}]'>
+            <div class="project-thumb"><img src="images/LGBTQ1.png" alt="Pride Month Harm Reduction"></div>
+            <p class="project-title">Pride Month Harm Reduction</p><p class="project-tag">Design</p>
+          </div>
+        </div>
+      </div>
 
-    <!-- Flipbook viewer -->
-    <div id="flipbook-wrap" style="margin-bottom:4rem;">
-      <div id="flipbook-title" style="font-family:'Instrument Serif',serif;font-size:22px;margin-bottom:1rem;">Summer 2024</div>
-      <div style="position:relative;background:#111;border-radius:8px;overflow:hidden;">
-        <canvas id="pdf-canvas" style="display:block;width:100%;height:auto;"></canvas>
-        <div id="pdf-loading" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#aaa;font-family:'EB Garamond',serif;font-size:15px;">Loading...</div>
+      <!-- Right: magazine flipbook -->
+      <div class="design-right">
+        <p class="section-label" style="margin-bottom:1rem;">Magazine</p>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1rem;">
+          <button class="mag-btn active" onclick="loadMag('Summer24.pdf','Summer 2024',this)">Summer '24</button>
+          <button class="mag-btn" onclick="loadMag('October24.pdf','October 2024',this)">Oct '24</button>
+          <button class="mag-btn" onclick="loadMag('November24.pdf','November 2024',this)">Nov '24</button>
+          <button class="mag-btn" onclick="loadMag('December24.pdf','December 2024',this)">Dec '24</button>
+        </div>
+        <div id="flipbook-title" style="font-family:'Instrument Serif',serif;font-size:18px;margin-bottom:0.75rem;">Summer 2024</div>
+        <div style="position:relative;background:#111;border-radius:8px;overflow:hidden;">
+          <canvas id="pdf-canvas" style="display:block;width:100%;height:auto;"></canvas>
+          <div id="pdf-loading" style="position:absolute;inset:0;min-height:200px;display:flex;align-items:center;justify-content:center;color:#aaa;font-family:'EB Garamond',serif;font-size:14px;">Loading...</div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:0.75rem;">
+          <button id="pdf-prev" onclick="changePage(-1)" style="font-family:'EB Garamond',serif;font-size:13px;padding:6px 14px;border:0.5px solid #ccc;border-radius:99px;background:none;cursor:pointer;">← Prev</button>
+          <span id="pdf-counter" style="font-family:'EB Garamond',serif;font-size:13px;color:#888;">Page 1 of 1</span>
+          <button id="pdf-next" onclick="changePage(1)" style="font-family:'EB Garamond',serif;font-size:13px;padding:6px 14px;border:0.5px solid #ccc;border-radius:99px;background:none;cursor:pointer;">Next →</button>
+        </div>
       </div>
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-top:1rem;">
-        <button id="pdf-prev" onclick="changePage(-1)" style="font-family:'EB Garamond',serif;font-size:14px;padding:8px 20px;border:0.5px solid #ccc;border-radius:99px;background:none;cursor:pointer;">← Prev</button>
-        <span id="pdf-counter" style="font-family:'EB Garamond',serif;font-size:14px;color:#888;">Page 1 of 1</span>
-        <button id="pdf-next" onclick="changePage(1)" style="font-family:'EB Garamond',serif;font-size:14px;padding:8px 20px;border:0.5px solid #ccc;border-radius:99px;background:none;cursor:pointer;">Next →</button>
-      </div>
+
     </div>
   </div>
 
@@ -233,7 +244,7 @@
   </div>
 
   <footer>
-    <span>Sasha Ryu — Portfolio</span>
+    <span>Sasha Ryu — Graphic Design Portfolio</span>
     <span>2026</span>
   </footer>
 </div>
