@@ -25,7 +25,7 @@
     .tab-panel { display: none; }
     .tab-panel.active { display: block; }
 
-    /* Work grid */
+    /* Design grid */
     .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: #ddd; margin-bottom: 4rem; }
     .project-card { background: #fff; padding: 1.5rem; cursor: pointer; }
     .project-card:hover .project-title { text-decoration: underline; }
@@ -95,7 +95,7 @@
   <nav>
     <span class="nav-name">Sasha Ryu</span>
     <div class="nav-links">
-      <a onclick="switchTab('work')">Work</a>
+      <a onclick="switchTab('Design')">Design</a>
       <a onclick="switchTab('articles')">Articles</a>
       <a onclick="switchTab('about')">About</a>
     </div>
@@ -107,13 +107,13 @@
   </section>
 
   <div class="tab-bar">
-    <button class="tab-btn active" onclick="switchTab('work')">Work</button>
+    <button class="tab-btn active" onclick="switchTab('Design')">Design</button>
     <button class="tab-btn" onclick="switchTab('articles')">Articles</button>
     <button class="tab-btn" onclick="switchTab('about')">About</button>
   </div>
 
-  <!-- Work tab -->
-  <div class="tab-panel active" id="tab-work">
+  <!-- Design tab -->
+  <div class="tab-panel active" id="tab-Design">
     <div class="grid">
       <div class="project-card" onclick="openLightbox(this)" data-project='[{"img":"images/WEED1.png","title":"","desc":""},{"img":"images/WEED2.png","title":"","desc":""},{"img":"images/WEED3.png","title":"","desc":""},{"img":"images/WEED4.png","title":"","desc":""}]'>
         <div class="project-thumb"><img src="images/WEED1.png" alt="Cannabis + Sleep"></div>
