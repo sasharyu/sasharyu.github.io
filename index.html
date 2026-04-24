@@ -90,11 +90,12 @@
     .mag-btn:hover { border-color: #aaa; color: #1a1a1a; }
     .mag-btn.active { background: #1a1a1a; color: #fff; border-color: #1a1a1a; }
 
-    /* Two-column design layout */
-    .design-layout { display: grid; grid-template-columns: 3fr 2fr; gap: 2rem; margin-bottom: 4rem; align-items: start; }
-    .design-left {}
-    .design-right {}
-    .grid-2col { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: #ddd; }
+    /* PDF Modal */
+    .pdf-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 1000; flex-direction: column; }
+    .pdf-modal.open { display: flex; }
+    .pdf-modal-header { display: flex; justify-content: space-between; align-items: center; padding: 1.25rem 2rem; border-bottom: 0.5px solid rgba(255,255,255,0.12); flex-shrink: 0; }
+    .pdf-modal-title { font-family: 'Instrument Serif', serif; font-size: 22px; color: #fff; font-weight: 400; }
+    .pdf-modal-body { flex: 1; overflow-y: auto; padding: 2rem; }
 
     /* Masonry photography grid */
     .masonry-grid { columns: 3; column-gap: 12px; margin-bottom: 4rem; }
@@ -102,8 +103,8 @@
     .masonry-item img { width: 100%; display: block; transition: opacity 0.2s; }
     .masonry-item:hover img { opacity: 0.9; }
 
-    @media (max-width: 700px) { .grid { grid-template-columns: 1fr 1fr; } .grid-2col { grid-template-columns: 1fr 1fr; } .design-layout { grid-template-columns: 1fr; } .articles-grid { grid-template-columns: 1fr 1fr; } .masonry-grid { columns: 2; } .about { grid-template-columns: 1fr; } .lightbox-stage { padding: 1rem 3.5rem; } .lightbox-arrow.prev { left: 0.5rem; } .lightbox-arrow.next { right: 0.5rem; } }
-    @media (max-width: 480px) { .grid { grid-template-columns: 1fr; } .grid-2col { grid-template-columns: 1fr; } .articles-grid { grid-template-columns: 1fr; } .masonry-grid { columns: 1; } .hero h1 { font-size: 36px; } }
+    @media (max-width: 700px) { .grid { grid-template-columns: 1fr 1fr; } .articles-grid { grid-template-columns: 1fr 1fr; } .masonry-grid { columns: 2; } .about { grid-template-columns: 1fr; } .lightbox-stage { padding: 1rem 3.5rem; } .lightbox-arrow.prev { left: 0.5rem; } .lightbox-arrow.next { right: 0.5rem; } }
+    @media (max-width: 480px) { .grid { grid-template-columns: 1fr; } .articles-grid { grid-template-columns: 1fr; } .masonry-grid { columns: 1; } .hero h1 { font-size: 36px; } }
   </style>
 </head>
 <body>
@@ -133,51 +134,75 @@
 
   <!-- design tab -->
   <div class="tab-panel active" id="tab-design">
-    <div class="design-layout">
+    <div class="grid" style="margin-bottom:4rem;">
 
-      <!-- Left: project grid -->
-      <div class="design-left">
-        <div class="grid-2col">
-          <div class="project-card" onclick="openLightbox(this)" data-project='[{"img":"images/WEED1.png","title":"","desc":""},{"img":"images/WEED2.png","title":"","desc":""},{"img":"images/WEED3.png","title":"","desc":""},{"img":"images/WEED4.png","title":"","desc":""}]'>
-            <div class="project-thumb"><img src="images/WEED1.png" alt="Cannabis + Sleep"></div>
-            <p class="project-title">Cannabis + Sleep</p><p class="project-tag">Design</p>
-          </div>
-          <div class="project-card" onclick="openLightbox(this)" data-project='[{"img":"images/MDMA1.png","title":"","desc":""},{"img":"images/MDMA2.png","title":"","desc":""},{"img":"images/MDMA3.png","title":"","desc":""},{"img":"images/MDMA4.png","title":"","desc":""},{"img":"images/MDMA5.png","title":"","desc":""},{"img":"images/MDMA6.png","title":"","desc":""},{"img":"images/MDMA7.png","title":"","desc":""}]'>
-            <div class="project-thumb"><img src="images/MDMA1.png" alt="MDMA + Lifespan"></div>
-            <p class="project-title">MDMA + Lifespan</p><p class="project-tag">Design</p>
-          </div>
-          <div class="project-card" onclick="openLightbox(this)" data-project='[{"img":"images/RockTheRow.png","title":"","desc":""}]'>
-            <div class="project-thumb"><img src="images/RockTheRow.png" alt="Rock the Row"></div>
-            <p class="project-title">Rock the Row</p><p class="project-tag">Design</p>
-          </div>
-          <div class="project-card" onclick="openLightbox(this)" data-project='[{"img":"images/LGBTQ1.png","title":"","desc":""},{"img":"images/LGBTQ2.png","title":"","desc":""},{"img":"images/LGBTQ3.png","title":"","desc":""},{"img":"images/LGBTQ4.png","title":"","desc":""},{"img":"images/LGBTQ5.png","title":"","desc":""}]'>
-            <div class="project-thumb"><img src="images/LGBTQ1.png" alt="Pride Month Harm Reduction"></div>
-            <p class="project-title">Pride Month Harm Reduction</p><p class="project-tag">Design</p>
-          </div>
-        </div>
+      <!-- Design projects -->
+      <div class="project-card" onclick="openLightbox(this)" data-project='[{"img":"images/WEED1.png","title":"","desc":""},{"img":"images/WEED2.png","title":"","desc":""},{"img":"images/WEED3.png","title":"","desc":""},{"img":"images/WEED4.png","title":"","desc":""}]'>
+        <div class="project-thumb"><img src="images/WEED1.png" alt="Cannabis + Sleep"></div>
+        <p class="project-title">Cannabis + Sleep</p><p class="project-tag">Design</p>
+      </div>
+      <div class="project-card" onclick="openLightbox(this)" data-project='[{"img":"images/MDMA1.png","title":"","desc":""},{"img":"images/MDMA2.png","title":"","desc":""},{"img":"images/MDMA3.png","title":"","desc":""},{"img":"images/MDMA4.png","title":"","desc":""},{"img":"images/MDMA5.png","title":"","desc":""},{"img":"images/MDMA6.png","title":"","desc":""},{"img":"images/MDMA7.png","title":"","desc":""}]'>
+        <div class="project-thumb"><img src="images/MDMA1.png" alt="MDMA + Lifespan"></div>
+        <p class="project-title">MDMA + Lifespan</p><p class="project-tag">Design</p>
+      </div>
+      <div class="project-card" onclick="openLightbox(this)" data-project='[{"img":"images/RockTheRow.png","title":"","desc":""}]'>
+        <div class="project-thumb"><img src="images/RockTheRow.png" alt="Rock the Row"></div>
+        <p class="project-title">Rock the Row</p><p class="project-tag">Design</p>
+      </div>
+      <div class="project-card" onclick="openLightbox(this)" data-project='[{"img":"images/LGBTQ1.png","title":"","desc":""},{"img":"images/LGBTQ2.png","title":"","desc":""},{"img":"images/LGBTQ3.png","title":"","desc":""},{"img":"images/LGBTQ4.png","title":"","desc":""},{"img":"images/LGBTQ5.png","title":"","desc":""}]'>
+        <div class="project-thumb"><img src="images/LGBTQ1.png" alt="Pride Month Harm Reduction"></div>
+        <p class="project-title">Pride Month Harm Reduction</p><p class="project-tag">Design</p>
       </div>
 
-      <!-- Right: magazine flipbook -->
-      <div class="design-right">
-        <p class="section-label" style="margin-bottom:1rem;">Magazine</p>
-        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1rem;">
-          <button class="mag-btn active" onclick="loadMag('Summer24.pdf','Summer 2024',this)">Summer '24</button>
-          <button class="mag-btn" onclick="loadMag('October24.pdf','October 2024',this)">Oct '24</button>
-          <button class="mag-btn" onclick="loadMag('November24.pdf','November 2024',this)">Nov '24</button>
-          <button class="mag-btn" onclick="loadMag('December24.pdf','December 2024',this)">Dec '24</button>
+      <!-- Magazine cards -->
+      <div class="project-card" onclick="openPDF('Summer24.pdf','Summer 2024')">
+        <div class="project-thumb mag-cover" style="background:#1a1a1a;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;">
+          <span style="font-family:'Instrument Serif',serif;font-size:22px;color:#fff;text-align:center;line-height:1.2;">DT<br>mag</span>
+          <span style="font-size:11px;color:#aaa;letter-spacing:0.08em;text-transform:uppercase;">Summer 2024</span>
         </div>
-        <div id="flipbook-title" style="font-family:'Instrument Serif',serif;font-size:18px;margin-bottom:0.75rem;">Summer 2024</div>
-        <div style="position:relative;background:#111;border-radius:8px;overflow:hidden;">
-          <canvas id="pdf-canvas" style="display:block;width:100%;height:auto;"></canvas>
-          <div id="pdf-loading" style="position:absolute;inset:0;min-height:200px;display:flex;align-items:center;justify-content:center;color:#aaa;font-family:'EB Garamond',serif;font-size:14px;">Loading...</div>
+        <p class="project-title">Summer 2024</p><p class="project-tag">Magazine</p>
+      </div>
+      <div class="project-card" onclick="openPDF('October24.pdf','October 2024')">
+        <div class="project-thumb mag-cover" style="background:#1a1a1a;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;">
+          <span style="font-family:'Instrument Serif',serif;font-size:22px;color:#fff;text-align:center;line-height:1.2;">DT<br>mag</span>
+          <span style="font-size:11px;color:#aaa;letter-spacing:0.08em;text-transform:uppercase;">October 2024</span>
         </div>
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:0.75rem;">
-          <button id="pdf-prev" onclick="changePage(-1)" style="font-family:'EB Garamond',serif;font-size:13px;padding:6px 14px;border:0.5px solid #ccc;border-radius:99px;background:none;cursor:pointer;">← Prev</button>
-          <span id="pdf-counter" style="font-family:'EB Garamond',serif;font-size:13px;color:#888;">Page 1 of 1</span>
-          <button id="pdf-next" onclick="changePage(1)" style="font-family:'EB Garamond',serif;font-size:13px;padding:6px 14px;border:0.5px solid #ccc;border-radius:99px;background:none;cursor:pointer;">Next →</button>
+        <p class="project-title">October 2024</p><p class="project-tag">Magazine</p>
+      </div>
+      <div class="project-card" onclick="openPDF('November24.pdf','November 2024')">
+        <div class="project-thumb mag-cover" style="background:#1a1a1a;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;">
+          <span style="font-family:'Instrument Serif',serif;font-size:22px;color:#fff;text-align:center;line-height:1.2;">DT<br>mag</span>
+          <span style="font-size:11px;color:#aaa;letter-spacing:0.08em;text-transform:uppercase;">November 2024</span>
         </div>
+        <p class="project-title">November 2024</p><p class="project-tag">Magazine</p>
+      </div>
+      <div class="project-card" onclick="openPDF('December24.pdf','December 2024')">
+        <div class="project-thumb mag-cover" style="background:#1a1a1a;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;">
+          <span style="font-family:'Instrument Serif',serif;font-size:22px;color:#fff;text-align:center;line-height:1.2;">DT<br>mag</span>
+          <span style="font-size:11px;color:#aaa;letter-spacing:0.08em;text-transform:uppercase;">December 2024</span>
+        </div>
+        <p class="project-title">December 2024</p><p class="project-tag">Magazine</p>
       </div>
 
+    </div>
+  </div>
+
+  <!-- PDF Modal -->
+  <div class="pdf-modal" id="pdf-modal">
+    <div class="pdf-modal-header">
+      <span class="pdf-modal-title" id="pdf-modal-title"></span>
+      <button class="lightbox-close" onclick="closePDF()">&#215;</button>
+    </div>
+    <div class="pdf-modal-body">
+      <div style="position:relative;background:#111;border-radius:8px;overflow:hidden;max-width:700px;margin:0 auto;">
+        <canvas id="pdf-canvas" style="display:block;width:100%;height:auto;"></canvas>
+        <div id="pdf-loading" style="position:absolute;inset:0;min-height:300px;display:flex;align-items:center;justify-content:center;color:#aaa;font-family:'EB Garamond',serif;font-size:15px;">Loading...</div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-top:1rem;max-width:700px;margin-left:auto;margin-right:auto;">
+        <button id="pdf-prev" onclick="changePage(-1)" style="font-family:'EB Garamond',serif;font-size:14px;padding:8px 20px;border:0.5px solid rgba(255,255,255,0.3);border-radius:99px;background:none;color:#fff;cursor:pointer;">← Prev</button>
+        <span id="pdf-counter" style="font-family:'EB Garamond',serif;font-size:14px;color:rgba(255,255,255,0.5);">Page 1 of 1</span>
+        <button id="pdf-next" onclick="changePage(1)" style="font-family:'EB Garamond',serif;font-size:14px;padding:8px 20px;border:0.5px solid rgba(255,255,255,0.3);border-radius:99px;background:none;color:#fff;cursor:pointer;">Next →</button>
+      </div>
     </div>
   </div>
 
@@ -244,7 +269,7 @@
   </div>
 
   <footer>
-    <span>Sasha Ryu — Portfolio</span>
+    <span>Sasha Ryu — Graphic Design Portfolio</span>
     <span>2026</span>
   </footer>
 </div>
@@ -401,10 +426,10 @@
 
   let pdfDoc = null, pageNum = 1, pageRendering = false;
 
-  function loadMag(file, title, btn) {
-    document.querySelectorAll('.mag-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    document.getElementById('flipbook-title').textContent = title;
+  function openPDF(file, title) {
+    document.getElementById('pdf-modal-title').textContent = title;
+    document.getElementById('pdf-modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
     pageNum = 1;
     pdfDoc = null;
     document.getElementById('pdf-loading').style.display = 'flex';
@@ -416,8 +441,13 @@
       document.getElementById('pdf-canvas').style.display = 'block';
       renderPage(pageNum);
     }).catch(() => {
-      document.getElementById('pdf-loading').textContent = 'Could not load PDF.';
+      document.getElementById('pdf-loading').textContent = 'Could not load PDF. Make sure the file is in the root of your repo.';
     });
+  }
+
+  function closePDF() {
+    document.getElementById('pdf-modal').classList.remove('open');
+    document.body.style.overflow = '';
   }
 
   function renderPage(num) {
@@ -446,11 +476,16 @@
     renderPage(pageNum);
   }
 
-  // Auto-load first magazine when design tab is opened
-  const origSwitchTab = window.switchTab;
-  window.addEventListener('DOMContentLoaded', () => {
-    // Load on first visit to design tab
-    loadMag('Summer24.pdf', 'Summer 2024', document.querySelector('.mag-btn.active'));
+  document.getElementById('pdf-modal').addEventListener('click', e => {
+    if (e.target === document.getElementById('pdf-modal')) closePDF();
+  });
+
+  document.addEventListener('keydown', e => {
+    if (document.getElementById('pdf-modal').classList.contains('open')) {
+      if (e.key === 'ArrowRight') changePage(1);
+      if (e.key === 'ArrowLeft') changePage(-1);
+      if (e.key === 'Escape') closePDF();
+    }
   });
 </script>
 </body>
