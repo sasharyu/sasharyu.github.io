@@ -39,13 +39,16 @@
     /* Articles grid */
     .articles-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-bottom: 4rem; }
     .article-card { display: flex; flex-direction: column; text-decoration: none; color: #1a1a1a; }
+    .article-card.featured { grid-column: span 2; }
     .article-card:hover .article-card-title { text-decoration: underline; }
     .article-thumb { width: 100%; aspect-ratio: 16/9; background: #f0f0f0; border-radius: 8px; overflow: hidden; margin-bottom: 0.75rem; position: relative; }
+    .article-card.featured .article-thumb { aspect-ratio: 16/7; }
     .article-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .article-thumb-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
     .article-thumb-placeholder svg { width: 32px; height: 32px; opacity: 0.2; }
     .article-card-pub { font-size: 11px; color: #aaa; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 4px; }
     .article-card-title { font-size: 15px; line-height: 1.4; color: #1a1a1a; }
+    .article-card.featured .article-card-title { font-size: 18px; }
 
     /* About */
     .about { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 4rem; }
@@ -103,8 +106,8 @@
     .masonry-item img { width: 100%; display: block; transition: opacity 0.2s; }
     .masonry-item:hover img { opacity: 0.9; }
 
-    @media (max-width: 700px) { .grid { grid-template-columns: 1fr 1fr; } .articles-grid { grid-template-columns: 1fr 1fr; } .masonry-grid { columns: 2; } .about { grid-template-columns: 1fr; } .lightbox-stage { padding: 1rem 3.5rem; } .lightbox-arrow.prev { left: 0.5rem; } .lightbox-arrow.next { right: 0.5rem; } }
-    @media (max-width: 480px) { .grid { grid-template-columns: 1fr; } .articles-grid { grid-template-columns: 1fr; } .masonry-grid { columns: 1; } .hero h1 { font-size: 36px; } }
+    @media (max-width: 700px) { .grid { grid-template-columns: 1fr 1fr; } .articles-grid { grid-template-columns: 1fr 1fr; } .article-card.featured { grid-column: span 2; } .masonry-grid { columns: 2; } .about { grid-template-columns: 1fr; } .lightbox-stage { padding: 1rem 3.5rem; } .lightbox-arrow.prev { left: 0.5rem; } .lightbox-arrow.next { right: 0.5rem; } }
+    @media (max-width: 480px) { .grid { grid-template-columns: 1fr; } .articles-grid { grid-template-columns: 1fr; } .article-card.featured { grid-column: span 1; } .masonry-grid { columns: 1; } .hero h1 { font-size: 36px; } }
   </style>
 </head>
 <body>
@@ -345,11 +348,22 @@
 
   const placeholderSVG = `<svg viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>`;
 
+  const featuredTitles = new Set([
+    "Families left in the dark: UCSD, USC quietly sell donors\u2019 bodies to Navy for Israeli military training",
+    "USC, Navy extend contract to provide cadavers to IDF for training",
+    "USC reinstates academic achievement award, exceptional funding",
+    "Founding director of USC Games sued for sexual harassment",
+    "USC investigating prominent neuroscientist",
+    "USC to posthumously honor Nisei alums",
+    "Afghan students worry for family safety",
+  ]);
+
   function buildArticles() {
     const grid = document.getElementById('articles-grid');
     articles.forEach((a, i) => {
+      const isFeatured = featuredTitles.has(a.title);
       const card = document.createElement('a');
-      card.className = 'article-card';
+      card.className = 'article-card' + (isFeatured ? ' featured' : '');
       card.href = a.url;
       card.target = '_blank';
 
