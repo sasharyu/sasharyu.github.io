@@ -85,8 +85,14 @@
     .lightbox-slide-desc { font-family: 'EB Garamond', serif; font-size: 15px; color: rgba(255,255,255,0.55); line-height: 1.6; }
     .lightbox-counter { font-family: 'EB Garamond', serif; font-size: 14px; color: rgba(255,255,255,0.4); white-space: nowrap; }
 
-    @media (max-width: 700px) { .grid { grid-template-columns: 1fr 1fr; } .articles-grid { grid-template-columns: 1fr 1fr; } .about { grid-template-columns: 1fr; } .lightbox-stage { padding: 1rem 3.5rem; } .lightbox-arrow.prev { left: 0.5rem; } .lightbox-arrow.next { right: 0.5rem; } }
-    @media (max-width: 480px) { .grid { grid-template-columns: 1fr; } .articles-grid { grid-template-columns: 1fr; } .hero h1 { font-size: 36px; } }
+    /* Masonry photography grid */
+    .masonry-grid { columns: 3; column-gap: 12px; margin-bottom: 4rem; }
+    .masonry-item { break-inside: avoid; margin-bottom: 12px; border-radius: 8px; overflow: hidden; cursor: pointer; }
+    .masonry-item img { width: 100%; display: block; transition: opacity 0.2s; }
+    .masonry-item:hover img { opacity: 0.9; }
+
+    @media (max-width: 700px) { .grid { grid-template-columns: 1fr 1fr; } .articles-grid { grid-template-columns: 1fr 1fr; } .masonry-grid { columns: 2; } .about { grid-template-columns: 1fr; } .lightbox-stage { padding: 1rem 3.5rem; } .lightbox-arrow.prev { left: 0.5rem; } .lightbox-arrow.next { right: 0.5rem; } }
+    @media (max-width: 480px) { .grid { grid-template-columns: 1fr; } .articles-grid { grid-template-columns: 1fr; } .masonry-grid { columns: 1; } .hero h1 { font-size: 36px; } }
   </style>
 </head>
 <body>
@@ -96,6 +102,7 @@
     <span class="nav-name">Sasha Ryu</span>
     <div class="nav-links">
       <a onclick="switchTab('design')">design</a>
+      <a onclick="switchTab('photography')">Photography</a>
       <a onclick="switchTab('articles')">Articles</a>
       <a onclick="switchTab('about')">About</a>
     </div>
@@ -108,6 +115,7 @@
 
   <div class="tab-bar">
     <button class="tab-btn active" onclick="switchTab('design')">design</button>
+    <button class="tab-btn" onclick="switchTab('photography')">Photography</button>
     <button class="tab-btn" onclick="switchTab('articles')">Articles</button>
     <button class="tab-btn" onclick="switchTab('about')">About</button>
   </div>
@@ -137,6 +145,26 @@
   <!-- Articles tab -->
   <div class="tab-panel" id="tab-articles">
     <div class="articles-grid" id="articles-grid"></div>
+  </div>
+
+  <!-- Photography tab -->
+  <div class="tab-panel" id="tab-photography">
+    <div class="masonry-grid">
+      <div class="masonry-item"><img src="images/Buddy.jpg" alt="Buddy"></div>
+      <div class="masonry-item"><img src="images/E-Sports Profile (2).jpg" alt="E-Sports Profile 2"></div>
+      <div class="masonry-item"><img src="images/E-Sports Profile.jpg" alt="E-Sports Profile"></div>
+      <div class="masonry-item"><img src="images/Flowers for Survivors_.jpg" alt="Flowers for Survivors"></div>
+      <div class="masonry-item"><img src="images/Halloween Parade.jpg" alt="Halloween Parade"></div>
+      <div class="masonry-item"><img src="images/A Honey Bird.jpg" alt="A Honey Bird"></div>
+      <div class="masonry-item"><img src="images/Local BLM Protest.jpg" alt="Local BLM Protest"></div>
+      <div class="masonry-item"><img src="images/Mother, Daughter BLM Protest.jpg" alt="Mother, Daughter BLM Protest"></div>
+      <div class="masonry-item"><img src="images/Park Photo.jpg" alt="Park Photo"></div>
+      <div class="masonry-item"><img src="images/Sofia.jpg" alt="Sofia"></div>
+      <div class="masonry-item"><img src="images/Special Needs Awareness Program (LGYC).jpg" alt="Special Needs Awareness Program"></div>
+      <div class="masonry-item"><img src="images/Survivor Prom Protest (2).jpg" alt="Survivor Prom Protest 2"></div>
+      <div class="masonry-item"><img src="images/Survivor Prom Protest.jpg" alt="Survivor Prom Protest"></div>
+      <div class="masonry-item"><img src="images/Welcome Week Performer.jpg" alt="Welcome Week Performer"></div>
+    </div>
   </div>
 
   <!-- About tab -->
