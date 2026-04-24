@@ -39,16 +39,13 @@
     /* Articles grid */
     .articles-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-bottom: 4rem; }
     .article-card { display: flex; flex-direction: column; text-decoration: none; color: #1a1a1a; }
-    .article-card.featured { grid-column: span 2; }
     .article-card:hover .article-card-title { text-decoration: underline; }
     .article-thumb { width: 100%; aspect-ratio: 16/9; background: #f0f0f0; border-radius: 8px; overflow: hidden; margin-bottom: 0.75rem; position: relative; }
-    .article-card.featured .article-thumb { aspect-ratio: 16/7; }
     .article-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .article-thumb-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
     .article-thumb-placeholder svg { width: 32px; height: 32px; opacity: 0.2; }
     .article-card-pub { font-size: 11px; color: #aaa; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 4px; }
     .article-card-title { font-size: 15px; line-height: 1.4; color: #1a1a1a; }
-    .article-card.featured .article-card-title { font-size: 18px; }
 
     /* About */
     .about { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 4rem; }
@@ -106,8 +103,8 @@
     .masonry-item img { width: 100%; display: block; transition: opacity 0.2s; }
     .masonry-item:hover img { opacity: 0.9; }
 
-    @media (max-width: 700px) { .grid { grid-template-columns: 1fr 1fr; } .articles-grid { grid-template-columns: 1fr 1fr; } .article-card.featured { grid-column: span 2; } .masonry-grid { columns: 2; } .about { grid-template-columns: 1fr; } .lightbox-stage { padding: 1rem 3.5rem; } .lightbox-arrow.prev { left: 0.5rem; } .lightbox-arrow.next { right: 0.5rem; } }
-    @media (max-width: 480px) { .grid { grid-template-columns: 1fr; } .articles-grid { grid-template-columns: 1fr; } .article-card.featured { grid-column: span 1; } .masonry-grid { columns: 1; } .hero h1 { font-size: 36px; } }
+    @media (max-width: 700px) { .grid { grid-template-columns: 1fr 1fr; } .articles-grid { grid-template-columns: 1fr 1fr; } .masonry-grid { columns: 2; } .about { grid-template-columns: 1fr; } .lightbox-stage { padding: 1rem 3.5rem; } .lightbox-arrow.prev { left: 0.5rem; } .lightbox-arrow.next { right: 0.5rem; } }
+    @media (max-width: 480px) { .grid { grid-template-columns: 1fr; } .articles-grid { grid-template-columns: 1fr; } .masonry-grid { columns: 1; } .hero h1 { font-size: 36px; } }
   </style>
 </head>
 <body>
@@ -152,13 +149,18 @@
         <div class="project-thumb"><img src="images/RockTheRow.png" alt="Rock the Row"></div>
         <p class="project-title">Rock the Row</p><p class="project-tag">Design</p>
       </div>
-      <div class="project-card" onclick="openLightbox(this)" data-project='[{"img":"images/AA1.png","title":"","desc":""},{"img":"images/AA2.png","title":"","desc":""},{"img":"images/AA3.png","title":"","desc":""},{"img":"images/AA4.png","title":"","desc":""}]'>
-        <div class="project-thumb"><img src="images/AA1.png" alt="Alcohol Addiction"></div>
-        <p class="project-title">Alcohol Addiction</p><p class="project-tag">Design</p>
+      <div class="project-card" onclick="openLightbox(this)" data-project='[{"img":"images/LGBTQ1.png","title":"","desc":""},{"img":"images/LGBTQ2.png","title":"","desc":""},{"img":"images/LGBTQ3.png","title":"","desc":""},{"img":"images/LGBTQ4.png","title":"","desc":""},{"img":"images/LGBTQ5.png","title":"","desc":""}]'>
+        <div class="project-thumb"><img src="images/LGBTQ1.png" alt="Pride Month Harm Reduction"></div>
+        <p class="project-title">Pride Month Harm Reduction</p><p class="project-tag">Design</p>
       </div>
+
       <div class="project-card" onclick="openLightbox(this)" data-project='[{"img":"images/shroom1.jpg","title":"","desc":""},{"img":"images/shroom2.jpg","title":"","desc":""},{"img":"images/shroom3.jpg","title":"","desc":""},{"img":"images/shroom4.jpg","title":"","desc":""},{"img":"images/shroom5.jpg","title":"","desc":""}]'>
         <div class="project-thumb"><img src="images/shroom1.jpg" alt="What are Shrooms?"></div>
         <p class="project-title">What are Shrooms?</p><p class="project-tag">Design</p>
+      </div>
+      <div class="project-card" onclick="openLightbox(this)" data-project='[{"img":"images/AA1.png","title":"","desc":""},{"img":"images/AA2.png","title":"","desc":""},{"img":"images/AA3.png","title":"","desc":""},{"img":"images/AA4.png","title":"","desc":""}]'>
+        <div class="project-thumb"><img src="images/AA1.png" alt="Alcohol Addiction"></div>
+        <p class="project-title">Alcohol Addiction</p><p class="project-tag">Design</p>
       </div>
 
       <!-- Magazine cards -->
@@ -292,28 +294,10 @@
 
 <script>
   const articles = [
-    // Row 1: F + R
     { url: "https://www.uscannenbergmedia.com/2026/04/06/families-left-in-the-dark-ucsd-usc-quietly-sell-donors-bodies-to-navy-for-israeli-military-training/", pub: "Annenberg Media", title: "Families left in the dark: UCSD, USC quietly sell donors\u2019 bodies to Navy for Israeli military training" },
     { url: "https://www.uscannenbergmedia.com/2026/02/18/usc-navy-program-appears-linked-to-specific-israeli-brigade-that-massacred-paramedics-photo-shows/", pub: "Annenberg Media", title: "USC Navy program appears linked to specific Israeli brigade that massacred paramedics, photo shows" },
-    // Row 2: F + R
     { url: "https://www.uscannenbergmedia.com/2026/01/25/usc-navy-extend-contract-to-provide-cadavers-to-idf-for-training/", pub: "Annenberg Media", title: "USC, Navy extend contract to provide cadavers to IDF for training" },
     { url: "https://dailytrojan.com/2024/06/26/usc-student-will-not-be-charged-in-fatal-stabbing-of-unhoused-carjacking-suspect/", pub: "Daily Trojan", title: "USC student will not be charged in fatal stabbing of unhoused carjacking suspect" },
-    // Row 3: F + R
-    { url: "https://dailytrojan.com/2024/03/25/usc-reinstates-academic-achievement-award-exceptional-funding/", pub: "Daily Trojan", title: "USC reinstates academic achievement award, exceptional funding" },
-    { url: "https://dailytrojan.com/2024/05/01/lapd-dps-clear-gaza-solidarity-occupation-at-usc-as-it-happened/", pub: "Daily Trojan", title: "LAPD, DPS clear Gaza solidarity occupation at USC \u2014 as it happened" },
-    // Row 4: F + R
-    { url: "https://dailytrojan.com/2024/02/06/founding-director-of-usc-games-sued-for-sexual-harassment/", pub: "Daily Trojan", title: "Founding director of USC Games sued for sexual harassment" },
-    { url: "https://dailytrojan.com/2024/04/27/gaza-solidarity-occupation-at-usc-continues-after-police-shutdown-live-updates/", pub: "Daily Trojan", title: "Gaza solidarity occupation at USC continues after police shutdown \u2014 live updates" },
-    // Row 5: F + R
-    { url: "https://dailytrojan.com/2023/11/30/usc-investigating-prominent-neuroscientist/", pub: "Daily Trojan", title: "USC investigating prominent neuroscientist" },
-    { url: "https://dailytrojan.com/2024/04/25/the-initial-gaza-solidarity-occupation-at-usc-and-the-aftermath-as-it-happened/", pub: "Daily Trojan", title: "The initial Gaza solidarity occupation at USC and the aftermath \u2014 as it happened" },
-    // Row 6: F + R
-    { url: "https://dailytrojan.com/2021/11/19/usc-to-posthumously-honor-nisei-alums/", pub: "Daily Trojan", title: "USC to posthumously honor Nisei alums" },
-    { url: "https://dailytrojan.com/2023/12/17/annenberg-professor-doxxed-following-comments-on-hamas/", pub: "Daily Trojan", title: "Annenberg professor doxxed following comments on Hamas" },
-    // Row 7: F + R
-    { url: "https://dailytrojan.com/2021/08/26/afghan-students-worry-for-family-safety/", pub: "Daily Trojan", title: "Afghan students worry for family safety" },
-    { url: "https://dailytrojan.com/2024/04/15/valedictorian-will-not-speak-at-class-of-2024-commencement/", pub: "Daily Trojan", title: "Valedictorian will not speak at Class of 2024 commencement" },
-    // Rows 8–21: regular articles in groups of 3
     { url: "https://dailytrojan.com/2024/06/24/sda-mfa-programs-to-be-tuition-free/", pub: "Daily Trojan", title: "SDA MFA programs to be tuition-free" },
     { url: "https://dailytrojan.com/2024/06/20/usc-student-will-not-be-charged-in-fatal-stabbing/", pub: "Daily Trojan", title: "USC student will not be charged in fatal stabbing" },
     { url: "https://dailytrojan.com/2024/06/12/university-releases-preliminary-culture-survey-results/", pub: "Daily Trojan", title: "University releases preliminary culture survey results" },
@@ -321,8 +305,16 @@
     { url: "https://dailytrojan.com/2024/05/29/jewish-students-discuss-incidents-of-antisemitism-harassment-on-campus/", pub: "Daily Trojan", title: "Jewish students discuss incidents of antisemitism, harassment on campus" },
     { url: "https://dailytrojan.com/2024/05/14/the-show-must-go-on-graduates-celebrate-without-main-ceremony/", pub: "Daily Trojan", title: "The show must go on: Graduates celebrate without main ceremony" },
     { url: "https://dailytrojan.com/2024/05/12/community-protests-pomona-college-commencement-at-shrine-auditorium/", pub: "Daily Trojan", title: "Community protests Pomona College commencement at Shrine Auditorium" },
+    { url: "https://dailytrojan.com/2024/05/01/lapd-dps-clear-gaza-solidarity-occupation-at-usc-as-it-happened/", pub: "Daily Trojan", title: "LAPD, DPS clear Gaza solidarity occupation at USC \u2014 as it happened" },
+    { url: "https://dailytrojan.com/2024/04/27/gaza-solidarity-occupation-at-usc-continues-after-police-shutdown-live-updates/", pub: "Daily Trojan", title: "Gaza solidarity occupation at USC continues after police shutdown \u2014 live updates" },
+    { url: "https://dailytrojan.com/2024/04/25/the-initial-gaza-solidarity-occupation-at-usc-and-the-aftermath-as-it-happened/", pub: "Daily Trojan", title: "The initial Gaza solidarity occupation at USC and the aftermath \u2014 as it happened" },
+    { url: "https://dailytrojan.com/2024/04/15/valedictorian-will-not-speak-at-class-of-2024-commencement/", pub: "Daily Trojan", title: "Valedictorian will not speak at Class of 2024 commencement" },
+    { url: "https://dailytrojan.com/2024/03/25/usc-reinstates-academic-achievement-award-exceptional-funding/", pub: "Daily Trojan", title: "USC reinstates academic achievement award, exceptional funding" },
     { url: "https://dailytrojan.com/2024/02/27/campus-voting-initiatives-ramp-up-for-primaries/", pub: "Daily Trojan", title: "Campus voting initiatives ramp up for primaries" },
     { url: "https://dailytrojan.com/2024/02/16/dacity-nunis-drops-out-of-usg-presidential-election/", pub: "Daily Trojan", title: "Dacity Nunis drops out of USG presidential election" },
+    { url: "https://dailytrojan.com/2024/02/06/founding-director-of-usc-games-sued-for-sexual-harassment/", pub: "Daily Trojan", title: "Founding director of USC Games sued for sexual harassment" },
+    { url: "https://dailytrojan.com/2023/12/17/annenberg-professor-doxxed-following-comments-on-hamas/", pub: "Daily Trojan", title: "Annenberg professor doxxed following comments on Hamas" },
+    { url: "https://dailytrojan.com/2023/11/30/usc-investigating-prominent-neuroscientist/", pub: "Daily Trojan", title: "USC investigating prominent neuroscientist" },
     { url: "https://dailytrojan.com/2023/11/16/panel-discusses-aftermath-in-artsakh/", pub: "Daily Trojan", title: "Panel discusses aftermath in Artsakh" },
     { url: "https://dailytrojan.com/2023/11/09/usc-democrats-republicans-clash-at-student-debate/", pub: "Daily Trojan", title: "USC Democrats, Republicans clash at student debate" },
     { url: "https://dailytrojan.com/2023/11/02/nasa-honors-heritage-with-beaded-jewelry-circle/", pub: "Daily Trojan", title: "NASA honors heritage with beaded jewelry circle" },
@@ -330,6 +322,7 @@
     { url: "https://dailytrojan.com/2023/10/24/secretary-buttigieg-discusses-future-of-american-politics/", pub: "Daily Trojan", title: "Secretary Buttigieg discusses future of American politics" },
     { url: "https://dailytrojan.com/2022/06/22/on-rent-and-ph-d-stipends-the-push-for-higher-pay/", pub: "Daily Trojan", title: "On rent and Ph.D. stipends, the push for higher pay" },
     { url: "https://dailytrojan.com/2021/12/02/care-not-cops-rally-calls-for-justice-for-love/", pub: "Daily Trojan", title: "Care Not Cops rally calls for justice for Love" },
+    { url: "https://dailytrojan.com/2021/11/19/usc-to-posthumously-honor-nisei-alums/", pub: "Daily Trojan", title: "USC to posthumously honor Nisei alums" },
     { url: "https://dailytrojan.com/2021/11/16/freshman-becomes-breakthrough-junior-finalist/", pub: "Daily Trojan", title: "Freshman becomes Breakthrough Junior finalist" },
     { url: "https://dailytrojan.com/2021/10/29/students-recognize-immigrant-day-of-action/", pub: "Daily Trojan", title: "Students recognize Immigrant Day of Action" },
     { url: "https://dailytrojan.com/2021/10/21/students-criticize-first-choice-housing-practices/", pub: "Daily Trojan", title: "Students criticize first-choice housing practices" },
@@ -344,26 +337,16 @@
     { url: "https://dailytrojan.com/2021/09/10/community-weighs-in-on-recall-election/", pub: "Daily Trojan", title: "Community weighs in on recall election" },
     { url: "https://dailytrojan.com/2021/09/08/usg-aims-to-create-welcoming-culture/", pub: "Daily Trojan", title: "USG aims to create welcoming culture" },
     { url: "https://dailytrojan.com/2021/09/01/usg-discusses-hybrid-learning-sustainability-initiatives/", pub: "Daily Trojan", title: "USG discusses hybrid learning, sustainability initiatives" },
+    { url: "https://dailytrojan.com/2021/08/26/afghan-students-worry-for-family-safety/", pub: "Daily Trojan", title: "Afghan students worry for family safety" },
   ];
 
   const placeholderSVG = `<svg viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>`;
 
-  const featuredTitles = new Set([
-    "Families left in the dark: UCSD, USC quietly sell donors\u2019 bodies to Navy for Israeli military training",
-    "USC, Navy extend contract to provide cadavers to IDF for training",
-    "USC reinstates academic achievement award, exceptional funding",
-    "Founding director of USC Games sued for sexual harassment",
-    "USC investigating prominent neuroscientist",
-    "USC to posthumously honor Nisei alums",
-    "Afghan students worry for family safety",
-  ]);
-
   function buildArticles() {
     const grid = document.getElementById('articles-grid');
     articles.forEach((a, i) => {
-      const isFeatured = featuredTitles.has(a.title);
       const card = document.createElement('a');
-      card.className = 'article-card' + (isFeatured ? ' featured' : '');
+      card.className = 'article-card';
       card.href = a.url;
       card.target = '_blank';
 
