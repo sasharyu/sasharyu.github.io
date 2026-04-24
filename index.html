@@ -26,7 +26,7 @@
     .tab-panel.active { display: block; }
 
     /* design grid */
-    .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: #ddd; margin-bottom: 4rem; }
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: #ddd; margin-bottom: 4rem; }
     .project-card { background: #fff; padding: 1.5rem; cursor: pointer; }
     .project-card:hover .project-title { text-decoration: underline; }
     .project-thumb { width: 100%; aspect-ratio: 4/5; background: #f5f5f5; border-radius: 8px; margin-bottom: 1rem; overflow: hidden; }
@@ -141,17 +141,9 @@
         <div class="project-thumb"><img src="images/WEED1.png" alt="Cannabis + Sleep"></div>
         <p class="project-title">Cannabis + Sleep</p><p class="project-tag">Design</p>
       </div>
-         <div class="project-card" onclick="openPDF('October24.pdf','October 2024')">
-        <div class="project-thumb"><img src="images/October.jpg" alt="October 2024"></div>
-        <p class="project-title">October 2024</p><p class="project-tag">Magazine</p>
-      </div>
       <div class="project-card" onclick="openLightbox(this)" data-project='[{"img":"images/MDMA1.png","title":"","desc":""},{"img":"images/MDMA2.png","title":"","desc":""},{"img":"images/MDMA3.png","title":"","desc":""},{"img":"images/MDMA4.png","title":"","desc":""},{"img":"images/MDMA5.png","title":"","desc":""},{"img":"images/MDMA6.png","title":"","desc":""},{"img":"images/MDMA7.png","title":"","desc":""}]'>
         <div class="project-thumb"><img src="images/MDMA1.png" alt="MDMA + Lifespan"></div>
         <p class="project-title">MDMA + Lifespan</p><p class="project-tag">Design</p>
-      </div>
-         <div class="project-card" onclick="openPDF('November24.pdf','November 2024')">
-        <div class="project-thumb"><img src="images/November.jpg" alt="November 2024"></div>
-        <p class="project-title">November 2024</p><p class="project-tag">Magazine</p>
       </div>
       <div class="project-card" onclick="openLightbox(this)" data-project='[{"img":"images/RockTheRow.png","title":"","desc":""}]'>
         <div class="project-thumb"><img src="images/RockTheRow.png" alt="Rock the Row"></div>
@@ -166,8 +158,8 @@
         <div class="project-thumb"><img src="images/shroom1.jpg" alt="What are Shrooms?"></div>
         <p class="project-title">What are Shrooms?</p><p class="project-tag">Design</p>
       </div>
-      <div class="project-card" onclick="openLightbox(this)" data-project='[{"img":"images/AA1.jpg","title":"","desc":""},{"img":"images/AA2.jpg","title":"","desc":""},{"img":"images/AA3.jpg","title":"","desc":""},{"img":"images/AA4.jpg","title":"","desc":""}]'>
-        <div class="project-thumb"><img src="images/AA1.jpg" alt="Alcohol Addiction"></div>
+      <div class="project-card" onclick="openLightbox(this)" data-project='[{"img":"images/AA1.png","title":"","desc":""},{"img":"images/AA2.png","title":"","desc":""},{"img":"images/AA3.png","title":"","desc":""},{"img":"images/AA4.png","title":"","desc":""}]'>
+        <div class="project-thumb"><img src="images/AA1.png" alt="Alcohol Addiction"></div>
         <p class="project-title">Alcohol Addiction</p><p class="project-tag">Design</p>
       </div>
 
@@ -176,17 +168,19 @@
         <div class="project-thumb"><img src="images/Summer.jpg" alt="Summer 2024"></div>
         <p class="project-title">Summer 2024</p><p class="project-tag">Magazine</p>
       </div>
+      <div class="project-card" onclick="openPDF('October24.pdf','October 2024')">
+        <div class="project-thumb"><img src="images/October.jpg" alt="October 2024"></div>
+        <p class="project-title">October 2024</p><p class="project-tag">Magazine</p>
+      </div>
+      <div class="project-card" onclick="openPDF('November24.pdf','November 2024')">
+        <div class="project-thumb"><img src="images/November.jpg" alt="November 2024"></div>
+        <p class="project-title">November 2024</p><p class="project-tag">Magazine</p>
+      </div>
       <div class="project-card" onclick="openPDF('December24.pdf','December 2024')">
         <div class="project-thumb"><img src="images/December.jpg" alt="December 2024"></div>
         <p class="project-title">December 2024</p><p class="project-tag">Magazine</p>
-      </div>  
-      <div class="project-card" onclick="openLightbox(this)" data-project='[{"img":"images/Carfentanil1.jpg","title":"","desc":""},{"img":"images/Carfentanil2.jpg","title":"","desc":""},{"img":"images/Carfentanil3.jpg","title":"","desc":""}]'>
-        <div class="project-thumb"><img src="images/Carfentanil1.jpg" alt="What is Carfentanil?"></div>
-        <p class="project-title">What is Carfentanil?</p><p class="project-tag">Design</p>
       </div>
-      <div class="project-card" onclick="openLightbox(this)" data-project='[{"img":"images/Alc + Brain Development1.jpg","title":"","desc":""},{"img":"images/Alc + Brain Development2.jpg","title":"","desc":""},{"img":"images/Alc + Brain Development3.jpg","title":"","desc":""},{"img":"images/Alc + Brain Development4.jpg","title":"","desc":""}]'>
-        <div class="project-thumb"><img src="images/Alc + Brain Development1.jpg" alt="Alcohol + Brain Development"></div>
-        <p class="project-title">Alcohol + Brain Development</p><p class="project-tag">Design</p>
+
     </div>
   </div>
 
@@ -224,12 +218,12 @@
       <div class="masonry-item"><img src="images/Flowers for Survivors_.jpg" alt="Flowers for Survivors"></div>
       <div class="masonry-item"><img src="images/Halloween Parade.jpg" alt="Halloween Parade"></div>
       <div class="masonry-item"><img src="images/A Honey Bird.jpg" alt="A Honey Bird"></div>
+      <div class="masonry-item"><img src="images/Local BLM Protest.jpg" alt="Local BLM Protest"></div>
       <div class="masonry-item"><img src="images/Mother, Daughter BLM Protest.jpg" alt="Mother, Daughter BLM Protest"></div>
       <div class="masonry-item"><img src="images/Park Photo.jpg" alt="Park Photo"></div>
       <div class="masonry-item"><img src="images/Sofia.jpg" alt="Sofia"></div>
       <div class="masonry-item"><img src="images/Special Needs Awareness Program (LGYC).jpg" alt="Special Needs Awareness Program"></div>
       <div class="masonry-item"><img src="images/Survivor Prom Protest (2).jpg" alt="Survivor Prom Protest 2"></div>
-      <div class="masonry-item"><img src="images/Local BLM Protest.jpg" alt="Local BLM Protest"></div>
       <div class="masonry-item"><img src="images/Survivor Prom Protest.jpg" alt="Survivor Prom Protest"></div>
       <div class="masonry-item"><img src="images/Welcome Week Performer.jpg" alt="Welcome Week Performer"></div>
     </div>
@@ -272,7 +266,7 @@
   </div>
 
   <footer>
-    <span>Sasha Ryu — Portfolio</span>
+    <span>Sasha Ryu — Graphic Design Portfolio</span>
     <span>2026</span>
   </footer>
 </div>
