@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sasha Ryu — Graphic Design Portfolio</title>
+  <title>Sasha Ryu — Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=EB+Garamond:wght@400;500&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -25,11 +25,11 @@
     .tab-panel { display: none; }
     .tab-panel.active { display: block; }
 
-    /* Work grid */
+    /* design grid */
     .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: #ddd; margin-bottom: 4rem; }
     .project-card { background: #fff; padding: 1.5rem; cursor: pointer; }
     .project-card:hover .project-title { text-decoration: underline; }
-    .project-thumb { width: 100%; aspect-ratio: 4/3; background: #f5f5f5; border-radius: 8px; margin-bottom: 1rem; overflow: hidden; }
+    .project-thumb { width: 100%; aspect-ratio: 4/5; background: #f5f5f5; border-radius: 8px; margin-bottom: 1rem; overflow: hidden; }
     .project-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s ease; }
     .project-card:hover .project-thumb img { transform: scale(1.03); }
     .project-thumb-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 13px; color: #bbb; }
@@ -95,7 +95,7 @@
   <nav>
     <span class="nav-name">Sasha Ryu</span>
     <div class="nav-links">
-      <a onclick="switchTab('work')">Work</a>
+      <a onclick="switchTab('design')">design</a>
       <a onclick="switchTab('articles')">Articles</a>
       <a onclick="switchTab('about')">About</a>
     </div>
@@ -107,29 +107,29 @@
   </section>
 
   <div class="tab-bar">
-    <button class="tab-btn active" onclick="switchTab('work')">Work</button>
+    <button class="tab-btn active" onclick="switchTab('design')">design</button>
     <button class="tab-btn" onclick="switchTab('articles')">Articles</button>
     <button class="tab-btn" onclick="switchTab('about')">About</button>
   </div>
 
-  <!-- Work tab -->
-  <div class="tab-panel active" id="tab-work">
+  <!-- design tab -->
+  <div class="tab-panel active" id="tab-design">
     <div class="grid">
-      <div class="project-card" onclick="openLightbox(this)" data-project='[{"img":"images/LGBT1.png","title":"","desc":""},{"img":"images/LGBT2.png","title":"","desc":""},{"img":"images/LGBT3.png","title":"","desc":""},{"img":"images/LGBT4.png","title":"","desc":""},{"img":"images/LGBT5.png","title":"","desc":""}]'>
-        <div class="project-thumb"><img src="images/LGBT1.png" alt="Pride Month Harm Reduction"></div>
-        <p class="project-title">Pride Month Harm Reduction</p><p class="project-tag">Design</p>
+      <div class="project-card" onclick="openLightbox(this)" data-project='[{"img":"images/WEED1.png","title":"","desc":""},{"img":"images/WEED2.png","title":"","desc":""},{"img":"images/WEED3.png","title":"","desc":""},{"img":"images/WEED4.png","title":"","desc":""}]'>
+        <div class="project-thumb"><img src="images/WEED1.png" alt="Canabis+ + Sleep"></div>
+        <p class="project-title">Cannabis + Sleep</p><p class="project-tag">Design</p>
       </div>
       <div class="project-card" onclick="openLightbox(this)" data-project='[{"img":"images/MDMA1.png","title":"","desc":""},{"img":"images/MDMA2.png","title":"","desc":""},{"img":"images/MDMA3.png","title":"","desc":""},{"img":"images/MDMA4.png","title":"","desc":""},{"img":"images/MDMA5.png","title":"","desc":""},{"img":"images/MDMA6.png","title":"","desc":""},{"img":"images/MDMA7.png","title":"","desc":""}]'>
-        <div class="project-thumb"><img src="images/MDMA1.png" alt="MDMA Impacts"></div>
-        <p class="project-title">MDMA Impacts</p><p class="project-tag">Design</p>
+        <div class="project-thumb"><img src="images/MDMA1.png" alt="MDMA + Lifespan"></div>
+        <p class="project-title">MDMA + Lifespan</p><p class="project-tag">Design</p>
       </div>
       <div class="project-card" onclick="openLightbox(this)" data-project='[{"img":"images/RockTheRow.png","title":"","desc":""}]'>
         <div class="project-thumb"><img src="images/RockTheRow.png" alt="Rock the Row"></div>
         <p class="project-title">Rock the Row</p><p class="project-tag">Design</p>
       </div>
-      <div class="project-card" onclick="openLightbox(this)" data-project='[{"img":"images/WEED1.png","title":"","desc":""},{"img":"images/WEED2.png","title":"","desc":""},{"img":"images/WEED3.png","title":"","desc":""},{"img":"images/WEED4.png","title":"","desc":""}]'>
-        <div class="project-thumb"><img src="images/WEED1.png" alt="Cannabis + Sleep"></div>
-        <p class="project-title">Cannabis + Sleep</p><p class="project-tag">Design</p>
+      <div class="project-card" onclick="openLightbox(this)" data-project='[{"img":"images/LGBTQ1.png","title":"","desc":""},{"img":"images/LGBTQ2.png","title":"","desc":""},{"img":"images/LGBTQ3.png","title":"","desc":""},{"img":"images/LGBTQ4.png","title":"","desc":""},{"img":"images/LGBTQ5.png","title":"","desc":""}]'>
+        <div class="project-thumb"><img src="images/LGBTQ1.png" alt="Pride Month Harm Reduction"></div>
+        <p class="project-title">Pride Month Harm Reduction</p><p class="project-tag">Design</p>
       </div>
     </div>
   </div>
