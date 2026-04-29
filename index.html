@@ -148,10 +148,6 @@
         <div class="project-thumb"><img src="images/MDMA1.png" alt="MDMA + Lifespan"></div>
         <p class="project-title">MDMA + Lifespan</p><p class="project-tag">Design</p>
       </div>
-      <div class="project-card" onclick="openPDF('October24.pdf','October 2024')">
-        <div class="project-thumb"><img src="images/October.jpg" alt="October 2024"></div>
-        <p class="project-title">October 2024</p><p class="project-tag">Magazine</p>
-      </div>
       <div class="project-card" onclick="openLightbox(this)" data-project='[{"img":"images/RockTheRow.png","title":"","desc":""}]'>
         <div class="project-thumb"><img src="images/RockTheRow.png" alt="Rock the Row"></div>
         <p class="project-title">Rock the Row</p><p class="project-tag">Design</p>
@@ -168,10 +164,6 @@
         <div class="project-thumb"><img src="images/AA1.jpg" alt="Alcohol Addiction"></div>
         <p class="project-title">Alcohol Addiction</p><p class="project-tag">Design</p>
       </div>
-      <div class="project-card" onclick="openPDF('November24.pdf','November 2024')">
-        <div class="project-thumb"><img src="images/November.jpg" alt="November 2024"></div>
-        <p class="project-title">November 2024</p><p class="project-tag">Magazine</p>
-      </div>
       <div class="project-card" onclick="openLightbox(this)" data-project='[{"img":"images/Alc + Brain Development1.jpg","title":"","desc":""},{"img":"images/Alc + Brain Development2.jpg","title":"","desc":""},{"img":"images/Alc + Brain Development3.jpg","title":"","desc":""},{"img":"images/Alc + Brain Development4.jpg","title":"","desc":""}]'>
         <div class="project-thumb"><img src="images/Alc + Brain Development1.jpg" alt="Alcohol + Brain Development"></div>
         <p class="project-title">Alcohol Addiction</p><p class="project-tag">Design</p>
@@ -185,6 +177,14 @@
       <div class="project-card" onclick="openPDF('Summer24.pdf','Summer 2024')">
         <div class="project-thumb"><img src="images/Summer.jpg" alt="Summer 2024"></div>
         <p class="project-title">Summer 2024</p><p class="project-tag">Magazine</p>
+      </div>
+      <div class="project-card" onclick="openPDF('October24.pdf','October 2024')">
+        <div class="project-thumb"><img src="images/October.jpg" alt="October 2024"></div>
+        <p class="project-title">October 2024</p><p class="project-tag">Magazine</p>
+      </div>
+      <div class="project-card" onclick="openPDF('November24.pdf','November 2024')">
+        <div class="project-thumb"><img src="images/November.jpg" alt="November 2024"></div>
+        <p class="project-title">November 2024</p><p class="project-tag">Magazine</p>
       </div>
       <div class="project-card" onclick="openPDF('December24.pdf','December 2024')">
         <div class="project-thumb"><img src="images/December.jpg" alt="December 2024"></div>
@@ -490,15 +490,19 @@
     const spreadLeft = document.getElementById('spread-left');
     const spreadRight = document.getElementById('spread-right');
 
-    // Page 1 is the cover — center it, hide the left panel
+    // Page 1 is the cover — center it smaller, hide the left panel
     if (leftPage === 1) {
       spreadLeft.style.display = 'none';
       spreadRight.style.borderRadius = '8px';
-      await renderCanvas('pdf-canvas-right', 1, scale);
+      spreadRight.style.maxWidth = '380px';
+      spreadRight.style.margin = '0 auto';
+      await renderCanvas('pdf-canvas-right', 1, scale * 0.6);
       clearCanvas('pdf-canvas-left');
     } else {
       spreadLeft.style.display = '';
       spreadRight.style.borderRadius = '0 8px 8px 0';
+      spreadRight.style.maxWidth = '';
+      spreadRight.style.margin = '';
       await renderCanvas('pdf-canvas-left', leftPage, scale);
       const rightPage = leftPage + 1;
       if (rightPage <= pdfDoc.numPages) {
