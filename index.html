@@ -198,11 +198,17 @@
       <button class="lightbox-close" onclick="closePDF()">&#215;</button>
     </div>
     <div class="pdf-modal-body">
-      <div style="position:relative;background:#111;border-radius:8px;overflow:hidden;max-width:700px;margin:0 auto;">
-        <canvas id="pdf-canvas" style="display:block;width:100%;height:auto;"></canvas>
-        <div id="pdf-loading" style="position:absolute;inset:0;min-height:300px;display:flex;align-items:center;justify-content:center;color:#aaa;font-family:'EB Garamond',serif;font-size:15px;">Loading...</div>
+      <div id="pdf-spread" style="display:flex;gap:2px;justify-content:center;align-items:flex-start;max-width:1200px;margin:0 auto;position:relative;">
+        <div style="position:relative;flex:1;background:#111;border-radius:8px 0 0 8px;overflow:hidden;">
+          <canvas id="pdf-canvas-left" style="display:block;width:100%;height:auto;"></canvas>
+          <div id="pdf-loading-left" style="min-height:300px;display:flex;align-items:center;justify-content:center;color:#aaa;font-family:'EB Garamond',serif;font-size:15px;"></div>
+        </div>
+        <div style="position:relative;flex:1;background:#111;border-radius:0 8px 8px 0;overflow:hidden;">
+          <canvas id="pdf-canvas-right" style="display:block;width:100%;height:auto;"></canvas>
+          <div id="pdf-loading-right" style="min-height:300px;display:flex;align-items:center;justify-content:center;color:#aaa;font-family:'EB Garamond',serif;font-size:15px;"></div>
+        </div>
       </div>
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-top:1rem;max-width:700px;margin-left:auto;margin-right:auto;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-top:1rem;max-width:1200px;margin-left:auto;margin-right:auto;">
         <button id="pdf-prev" onclick="changePage(-1)" style="font-family:'EB Garamond',serif;font-size:14px;padding:8px 20px;border:0.5px solid rgba(255,255,255,0.3);border-radius:99px;background:none;color:#fff;cursor:pointer;">← Prev</button>
         <span id="pdf-counter" style="font-family:'EB Garamond',serif;font-size:14px;color:rgba(255,255,255,0.5);">Page 1 of 1</span>
         <button id="pdf-next" onclick="changePage(1)" style="font-family:'EB Garamond',serif;font-size:14px;padding:8px 20px;border:0.5px solid rgba(255,255,255,0.3);border-radius:99px;background:none;color:#fff;cursor:pointer;">Next →</button>
@@ -436,17 +442,27 @@
     document.body.style.overflow = 'hidden';
     pageNum = 1;
     pdfDoc = null;
-    document.getElementById('pdf-loading').style.display = 'flex';
-    document.getElementById('pdf-canvas').style.display = 'none';
+
+    setLoading(true);
 
     pdfjsLib.getDocument(file).promise.then(doc => {
       pdfDoc = doc;
-      document.getElementById('pdf-loading').style.display = 'none';
-      document.getElementById('pdf-canvas').style.display = 'block';
-      renderPage(pageNum);
+      setLoading(false);
+      renderSpread(pageNum);
     }).catch(() => {
-      document.getElementById('pdf-loading').textContent = 'Could not load PDF. Make sure the file is in the root of your repo.';
+      document.getElementById('pdf-loading-left').textContent = 'Could not load PDF.';
     });
+  }
+
+  function setLoading(on) {
+    const ll = document.getElementById('pdf-loading-left');
+    const lr = document.getElementById('pdf-loading-right');
+    const cl = document.getElementById('pdf-canvas-left');
+    const cr = document.getElementById('pdf-canvas-right');
+    ll.textContent = on ? 'Loading...' : '';
+    lr.textContent = '';
+    cl.style.display = on ? 'none' : 'block';
+    cr.style.display = on ? 'none' : 'block';
   }
 
   function closePDF() {
@@ -454,30 +470,71 @@
     document.body.style.overflow = '';
   }
 
-  function renderPage(num) {
+  async function renderSpread(leftPage) {
     if (!pdfDoc || pageRendering) return;
     pageRendering = true;
-    pdfDoc.getPage(num).then(page => {
-      const canvas = document.getElementById('pdf-canvas');
+
+    const scale = window.innerWidth < 700 ? 1 : 1.8;
+
+    // Page 1 is always the cover — show it solo on the right, blank on left
+    if (leftPage === 1) {
+      await renderCanvas('pdf-canvas-right', 1, scale);
+      clearCanvas('pdf-canvas-left');
+    } else {
+      await renderCanvas('pdf-canvas-left', leftPage, scale);
+      const rightPage = leftPage + 1;
+      if (rightPage <= pdfDoc.numPages) {
+        await renderCanvas('pdf-canvas-right', rightPage, scale);
+      } else {
+        clearCanvas('pdf-canvas-right');
+      }
+    }
+
+    pageRendering = false;
+
+    // Counter: show page range
+    if (leftPage === 1) {
+      document.getElementById('pdf-counter').textContent = `Page 1 of ${pdfDoc.numPages}`;
+    } else {
+      const right = Math.min(leftPage + 1, pdfDoc.numPages);
+      document.getElementById('pdf-counter').textContent = `Pages ${leftPage}–${right} of ${pdfDoc.numPages}`;
+    }
+
+    document.getElementById('pdf-prev').disabled = leftPage <= 1;
+    document.getElementById('pdf-next').disabled = leftPage >= pdfDoc.numPages - 1;
+  }
+
+  function renderCanvas(canvasId, page, scale) {
+    return pdfDoc.getPage(page).then(p => {
+      const canvas = document.getElementById(canvasId);
       const ctx = canvas.getContext('2d');
-      const viewport = page.getViewport({ scale: window.innerWidth < 600 ? 1.2 : 2 });
+      const viewport = p.getViewport({ scale });
       canvas.width = viewport.width;
       canvas.height = viewport.height;
-      page.render({ canvasContext: ctx, viewport }).promise.then(() => {
-        pageRendering = false;
-        document.getElementById('pdf-counter').textContent = `Page ${num} of ${pdfDoc.numPages}`;
-        document.getElementById('pdf-prev').disabled = num <= 1;
-        document.getElementById('pdf-next').disabled = num >= pdfDoc.numPages;
-      });
+      canvas.style.display = 'block';
+      return p.render({ canvasContext: ctx, viewport }).promise;
     });
+  }
+
+  function clearCanvas(canvasId) {
+    const canvas = document.getElementById(canvasId);
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    canvas.style.display = 'none';
   }
 
   function changePage(dir) {
     if (!pdfDoc) return;
-    const next = pageNum + dir;
-    if (next < 1 || next > pdfDoc.numPages) return;
+    let next;
+    if (pageNum === 1) {
+      // From cover, go to pages 2-3
+      next = dir > 0 ? 2 : 1;
+    } else {
+      next = pageNum + (dir * 2);
+    }
+    next = Math.max(1, Math.min(next, pdfDoc.numPages));
     pageNum = next;
-    renderPage(pageNum);
+    renderSpread(pageNum);
   }
 
   document.getElementById('pdf-modal').addEventListener('click', e => {
