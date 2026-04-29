@@ -96,6 +96,9 @@
     .pdf-modal-header { display: flex; justify-content: space-between; align-items: center; padding: 1.25rem 2rem; border-bottom: 0.5px solid rgba(255,255,255,0.12); flex-shrink: 0; }
     .pdf-modal-title { font-family: 'Instrument Serif', serif; font-size: 22px; color: #fff; font-weight: 400; }
     .pdf-modal-body { flex: 1; overflow-y: auto; padding: 2rem; }
+    .spread-arrow { background: none; border: 0.5px solid rgba(255,255,255,0.25); color: #fff; width: 44px; height: 44px; border-radius: 50%; font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: background 0.2s; }
+    .spread-arrow:hover { background: rgba(255,255,255,0.1); }
+    .spread-arrow:disabled { opacity: 0.2; cursor: default; }
 
     /* Masonry photography grid */
     .masonry-grid { columns: 3; column-gap: 12px; margin-bottom: 4rem; }
@@ -149,10 +152,6 @@
         <div class="project-thumb"><img src="images/RockTheRow.png" alt="Rock the Row"></div>
         <p class="project-title">Rock the Row</p><p class="project-tag">Design</p>
       </div>
-        <div class="project-card" onclick="openPDF('October24.pdf','October 2024')">
-        <div class="project-thumb"><img src="images/October.jpg" alt="October 2024"></div>
-        <p class="project-title">October 2024</p><p class="project-tag">Magazine</p>
-      </div>
       <div class="project-card" onclick="openLightbox(this)" data-project='[{"img":"images/LGBTQ1.png","title":"","desc":""},{"img":"images/LGBTQ2.png","title":"","desc":""},{"img":"images/LGBTQ3.png","title":"","desc":""},{"img":"images/LGBTQ4.png","title":"","desc":""},{"img":"images/LGBTQ5.png","title":"","desc":""}]'>
         <div class="project-thumb"><img src="images/LGBTQ1.png" alt="Pride Month Harm Reduction"></div>
         <p class="project-title">Pride Month Harm Reduction</p><p class="project-tag">Design</p>
@@ -169,19 +168,23 @@
         <div class="project-thumb"><img src="images/Alc + Brain Development1.jpg" alt="Alcohol + Brain Development"></div>
         <p class="project-title">Alcohol Addiction</p><p class="project-tag">Design</p>
       </div>
-      <div class="project-card" onclick="openPDF('November24.pdf','November 2024')">
-        <div class="project-thumb"><img src="images/November.jpg" alt="November 2024"></div>
-        <p class="project-title">November 2024</p><p class="project-tag">Magazine</p>
-      </div>
       <div class="project-card" onclick="openLightbox(this)" data-project='[{"img":"images/Carfentanil1.jpg","title":"","desc":""},{"img":"images/Carfentanil2.jpg","title":"","desc":""},{"img":"images/Carfentanil3.jpg","title":"","desc":""}]'>
         <div class="project-thumb"><img src="images/Carfentanil1.jpg" alt="What is Carfentanil?"></div>
         <p class="project-title">What is Carfentanil?</p><p class="project-tag">Design</p>
-      </div>   
+      </div>    
 
       <!-- Magazine cards -->
       <div class="project-card" onclick="openPDF('Summer24.pdf','Summer 2024')">
         <div class="project-thumb"><img src="images/Summer.jpg" alt="Summer 2024"></div>
         <p class="project-title">Summer 2024</p><p class="project-tag">Magazine</p>
+      </div>
+      <div class="project-card" onclick="openPDF('October24.pdf','October 2024')">
+        <div class="project-thumb"><img src="images/October.jpg" alt="October 2024"></div>
+        <p class="project-title">October 2024</p><p class="project-tag">Magazine</p>
+      </div>
+      <div class="project-card" onclick="openPDF('November24.pdf','November 2024')">
+        <div class="project-thumb"><img src="images/November.jpg" alt="November 2024"></div>
+        <p class="project-title">November 2024</p><p class="project-tag">Magazine</p>
       </div>
       <div class="project-card" onclick="openPDF('December24.pdf','December 2024')">
         <div class="project-thumb"><img src="images/December.jpg" alt="December 2024"></div>
@@ -198,20 +201,29 @@
       <button class="lightbox-close" onclick="closePDF()">&#215;</button>
     </div>
     <div class="pdf-modal-body">
-      <div id="pdf-spread" style="display:flex;gap:2px;justify-content:center;align-items:flex-start;max-width:1200px;margin:0 auto;position:relative;">
-        <div style="position:relative;flex:1;background:#111;border-radius:8px 0 0 8px;overflow:hidden;">
-          <canvas id="pdf-canvas-left" style="display:block;width:100%;height:auto;"></canvas>
-          <div id="pdf-loading-left" style="min-height:300px;display:flex;align-items:center;justify-content:center;color:#aaa;font-family:'EB Garamond',serif;font-size:15px;"></div>
+      <div style="display:flex;align-items:center;gap:1rem;max-width:1200px;margin:0 auto;">
+
+        <!-- Left arrow -->
+        <button id="pdf-prev" onclick="changePage(-1)" class="spread-arrow">&#8592;</button>
+
+        <!-- Spread -->
+        <div id="pdf-spread" style="display:flex;gap:2px;justify-content:center;align-items:flex-start;flex:1;">
+          <div id="spread-left" style="flex:1;background:#111;border-radius:8px 0 0 8px;overflow:hidden;">
+            <canvas id="pdf-canvas-left" style="display:block;width:100%;height:auto;"></canvas>
+            <div id="pdf-loading-left" style="min-height:300px;display:flex;align-items:center;justify-content:center;color:#aaa;font-family:'EB Garamond',serif;font-size:15px;"></div>
+          </div>
+          <div id="spread-right" style="flex:1;background:#111;border-radius:0 8px 8px 0;overflow:hidden;">
+            <canvas id="pdf-canvas-right" style="display:block;width:100%;height:auto;"></canvas>
+            <div id="pdf-loading-right" style="min-height:300px;display:flex;align-items:center;justify-content:center;color:#aaa;font-family:'EB Garamond',serif;font-size:15px;"></div>
+          </div>
         </div>
-        <div style="position:relative;flex:1;background:#111;border-radius:0 8px 8px 0;overflow:hidden;">
-          <canvas id="pdf-canvas-right" style="display:block;width:100%;height:auto;"></canvas>
-          <div id="pdf-loading-right" style="min-height:300px;display:flex;align-items:center;justify-content:center;color:#aaa;font-family:'EB Garamond',serif;font-size:15px;"></div>
-        </div>
+
+        <!-- Right arrow -->
+        <button id="pdf-next" onclick="changePage(1)" class="spread-arrow">&#8594;</button>
+
       </div>
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-top:1rem;max-width:1200px;margin-left:auto;margin-right:auto;">
-        <button id="pdf-prev" onclick="changePage(-1)" style="font-family:'EB Garamond',serif;font-size:14px;padding:8px 20px;border:0.5px solid rgba(255,255,255,0.3);border-radius:99px;background:none;color:#fff;cursor:pointer;">← Prev</button>
+      <div style="text-align:center;margin-top:1rem;">
         <span id="pdf-counter" style="font-family:'EB Garamond',serif;font-size:14px;color:rgba(255,255,255,0.5);">Page 1 of 1</span>
-        <button id="pdf-next" onclick="changePage(1)" style="font-family:'EB Garamond',serif;font-size:14px;padding:8px 20px;border:0.5px solid rgba(255,255,255,0.3);border-radius:99px;background:none;color:#fff;cursor:pointer;">Next →</button>
       </div>
     </div>
   </div>
@@ -475,12 +487,18 @@
     pageRendering = true;
 
     const scale = window.innerWidth < 700 ? 1 : 1.8;
+    const spreadLeft = document.getElementById('spread-left');
+    const spreadRight = document.getElementById('spread-right');
 
-    // Page 1 is always the cover — show it solo on the right, blank on left
+    // Page 1 is the cover — center it, hide the left panel
     if (leftPage === 1) {
+      spreadLeft.style.display = 'none';
+      spreadRight.style.borderRadius = '8px';
       await renderCanvas('pdf-canvas-right', 1, scale);
       clearCanvas('pdf-canvas-left');
     } else {
+      spreadLeft.style.display = '';
+      spreadRight.style.borderRadius = '0 8px 8px 0';
       await renderCanvas('pdf-canvas-left', leftPage, scale);
       const rightPage = leftPage + 1;
       if (rightPage <= pdfDoc.numPages) {
@@ -492,7 +510,6 @@
 
     pageRendering = false;
 
-    // Counter: show page range
     if (leftPage === 1) {
       document.getElementById('pdf-counter').textContent = `Page 1 of ${pdfDoc.numPages}`;
     } else {
