@@ -494,9 +494,9 @@
     if (leftPage === 1) {
       spreadLeft.style.display = 'none';
       spreadRight.style.borderRadius = '8px';
-      spreadRight.style.maxWidth = '380px';
+      spreadRight.style.maxWidth = '280px';
       spreadRight.style.margin = '0 auto';
-      await renderCanvas('pdf-canvas-right', 1, scale * 0.4);
+      await renderCanvas('pdf-canvas-right', 1, 1.4);
       clearCanvas('pdf-canvas-left');
     } else {
       spreadLeft.style.display = '';
