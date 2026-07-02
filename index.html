@@ -82,8 +82,12 @@
     .social-btn svg { width: 14px; height: 14px; flex-shrink: 0; }
 
     /* Video embed */
-    .video-wrap { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 8px; max-width: 700px; margin-bottom: 1.25rem; background: #f0f0f0; }
+    .video-wrap { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 8px; max-width: 700px; margin-bottom: 1.25rem; background: #f0f0f0; cursor: pointer; }
     .video-wrap iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+    .video-cover { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+    .video-play-btn { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 64px; height: 64px; background: rgba(0,0,0,0.6); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: background 0.2s, transform 0.2s; }
+    .video-play-btn svg { margin-left: 3px; }
+    .video-wrap:hover .video-play-btn { background: rgba(0,0,0,0.8); transform: translate(-50%, -50%) scale(1.08); }
     .collab-item { margin-bottom: 3rem; }
     .collab-title { font-family: 'EB Garamond', serif; font-size: 16px; font-weight: 500; margin-bottom: 4px; }
     .collab-desc { font-size: 14px; color: #888; }
@@ -266,8 +270,11 @@
   <!-- Collaborations tab -->
   <div class="tab-panel" id="tab-collaborations">
     <div class="collab-item">
-      <div class="video-wrap">
-        <iframe src="https://www.youtube.com/embed/GXkfo_ImlUk" title="Israeli Military Medics Are Training On Dead Americans" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <div class="video-wrap" id="collab-video" onclick="playCollabVideo()">
+        <img class="video-cover" src="images/CollabCover.jpg" alt="Israeli Military Medics Are Training On Dead Americans">
+        <div class="video-play-btn">
+          <svg viewBox="0 0 24 24" width="26" height="26" fill="#fff"><path d="M8 5v14l11-7z"/></svg>
+        </div>
       </div>
       <p class="collab-title">Israeli Military Medics Are Training On Dead Americans</p>
       <p class="collab-desc">A video collaboration tied to the USC/Navy cadaver reporting.</p>
@@ -595,6 +602,13 @@
       card.appendChild(title);
       grid.appendChild(card);
     });
+  }
+
+  function playCollabVideo() {
+    const wrap = document.getElementById('collab-video');
+    wrap.innerHTML = '<iframe src="https://www.youtube.com/embed/GXkfo_ImlUk?autoplay=1" title="Israeli Military Medics Are Training On Dead Americans" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+    wrap.onclick = null;
+    wrap.style.cursor = 'default';
   }
 
   function switchTab(name) {
