@@ -81,6 +81,13 @@
     .social-btn:hover { background: #f5f5f5; border-color: #aaa; }
     .social-btn svg { width: 14px; height: 14px; flex-shrink: 0; }
 
+    /* Video embed */
+    .video-wrap { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 8px; max-width: 700px; margin-bottom: 1.25rem; background: #f0f0f0; }
+    .video-wrap iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+    .collab-item { margin-bottom: 3rem; }
+    .collab-title { font-family: 'EB Garamond', serif; font-size: 16px; font-weight: 500; margin-bottom: 4px; }
+    .collab-desc { font-size: 14px; color: #888; }
+
     footer { padding: 2rem 0; font-size: 13px; color: #aaa; display: flex; justify-content: space-between; border-top: 0.5px solid #ddd; margin-top: 2rem; }
 
     /* Lightbox */
@@ -142,6 +149,7 @@
       <a onclick="switchTab('about')">About</a>
       <a onclick="switchTab('design')">Design</a>
       <a onclick="switchTab('articles')">Articles</a>
+      <a onclick="switchTab('collaborations')">Collaborations</a>
       <a onclick="switchTab('photography')">Photography</a>
     </div>
   </nav>
@@ -155,6 +163,7 @@
     <button class="tab-btn active" onclick="switchTab('about')">About</button>
     <button class="tab-btn" onclick="switchTab('design')">Design</button>
     <button class="tab-btn" onclick="switchTab('articles')">Articles</button>
+    <button class="tab-btn" onclick="switchTab('collaborations')">Collaborations</button>
     <button class="tab-btn" onclick="switchTab('photography')">Photography</button>
   </div>
 
@@ -191,8 +200,8 @@
         <div class="project-thumb"><img src="images/November.jpg" alt="November 2024"></div>
         <p class="project-title">November 2024</p><p class="project-tag">Magazine</p>
       </div>
-      <div class="project-card" onclick="openLightbox(this)" data-project='[{"img":"images/34-Samuel_DuBose.jpeg","title":"Samuel DuBose","desc":""},{"img":"images/6-Darrien_Hunt.jpeg","title":"Darrien Hunt","desc":""},{"img":"images/8-Desmond_Franklin.jpeg","title":"Desmond Franklin","desc":""},{"img":"images/22-Michael_Brown.jpeg","title":"Michael Brown","desc":""},{"img":"images/27-Philando_Castile.jpeg","title":"Philando Castile","desc":""},{"img":"images/28-Rayshard_Brooks.jpeg","title":"Rayshard Brooks","desc":""},{"img":"images/35-Stephon_Clark.jpeg","title":"Stephon Clark","desc":""}]'>
-        <div class="project-thumb"><img src="images/34-Samuel_DuBose.jpeg" alt="Say Their Names"></div>
+      <div class="project-card" onclick="openLightbox(this)" data-project='[{"img":"images/COVERstm.png","title":"","desc":""},{"img":"images/34-Samuel_DuBose.jpeg","title":"Samuel DuBose","desc":""},{"img":"images/6-Darrien_Hunt.jpeg","title":"Darrien Hunt","desc":""},{"img":"images/8-Desmond_Franklin.jpeg","title":"Desmond Franklin","desc":""},{"img":"images/22-Michael_Brown.jpeg","title":"Michael Brown","desc":""},{"img":"images/27-Philando_Castile.jpeg","title":"Philando Castile","desc":""},{"img":"images/28-Rayshard_Brooks.jpeg","title":"Rayshard Brooks","desc":""},{"img":"images/35-Stephon_Clark.jpeg","title":"Stephon Clark","desc":""}]'>
+        <div class="project-thumb"><img src="images/COVERstm.png" alt="Say Their Names"></div>
         <p class="project-title">Say Their Names</p><p class="project-tag">Design</p>
       </div>
       <div class="project-card" onclick="openLightbox(this)" data-project='[{"img":"images/Carfentanil1.jpg","title":"","desc":""},{"img":"images/Carfentanil2.jpg","title":"","desc":""},{"img":"images/Carfentanil3.jpg","title":"","desc":""}]'>
@@ -254,6 +263,17 @@
     <div class="articles-grid" id="articles-grid"></div>
   </div>
 
+  <!-- Collaborations tab -->
+  <div class="tab-panel" id="tab-collaborations">
+    <div class="collab-item">
+      <div class="video-wrap">
+        <iframe src="https://www.youtube.com/embed/GXkfo_ImlUk" title="Israeli Military Medics Are Training On Dead Americans" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+      <p class="collab-title">Israeli Military Medics Are Training On Dead Americans</p>
+      <p class="collab-desc">A video collaboration tied to the USC/Navy cadaver reporting.</p>
+    </div>
+  </div>
+
   <!-- Photography tab -->
   <div class="tab-panel" id="tab-photography">
     <div class="masonry-grid">
@@ -304,7 +324,7 @@
             <p class="project-title">Pride Month Harm Reduction</p><p class="project-tag">Design</p>
           </div>
           <div class="project-card" onclick="switchTab('design')">
-            <div class="project-thumb"><img src="images/34-Samuel_DuBose.jpeg" alt="Say Their Names"></div>
+            <div class="project-thumb"><img src="images/COVERstm.png" alt="Say Their Names"></div>
             <p class="project-title">Say Their Names</p><p class="project-tag">Design</p>
           </div>
           <div class="project-card" onclick="switchTab('design')">
