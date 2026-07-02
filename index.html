@@ -151,7 +151,7 @@
     <span class="nav-name">Sasha Ryu</span>
     <div class="nav-links">
       <a onclick="switchTab('about')">About</a>
-      <a onclick="switchTab('design')">Design</a>
+      <a onclick="switchTab('design')">Graphic Design</a>
       <a onclick="switchTab('articles')">Articles</a>
       <a onclick="switchTab('collaborations')">Collaborations</a>
       <a onclick="switchTab('photography')">Photography</a>
@@ -164,11 +164,11 @@
   </section>
 
   <div class="tab-bar">
-    <button class="tab-btn active" onclick="switchTab('about')">About</button>
-    <button class="tab-btn" onclick="switchTab('design')">Design</button>
-    <button class="tab-btn" onclick="switchTab('articles')">Articles</button>
-    <button class="tab-btn" onclick="switchTab('collaborations')">Collaborations</button>
-    <button class="tab-btn" onclick="switchTab('photography')">Photography</button>
+    <button class="tab-btn active" data-tab="about" onclick="switchTab('about')">About</button>
+    <button class="tab-btn" data-tab="design" onclick="switchTab('design')">Graphic Design</button>
+    <button class="tab-btn" data-tab="articles" onclick="switchTab('articles')">Articles</button>
+    <button class="tab-btn" data-tab="collaborations" onclick="switchTab('collaborations')">Collaborations</button>
+    <button class="tab-btn" data-tab="photography" onclick="switchTab('photography')">Photography</button>
   </div>
 
   <!-- design tab -->
@@ -204,10 +204,6 @@
         <div class="project-thumb"><img src="images/November.jpg" alt="November 2024"></div>
         <p class="project-title">November 2024</p><p class="project-tag">Magazine</p>
       </div>
-      <div class="project-card" onclick="openLightbox(this)" data-project='[{"img":"images/COVERstm.png","title":"","desc":""},{"img":"images/34-Samuel_DuBose.jpeg","title":"Samuel DuBose","desc":""},{"img":"images/6-Darrien_Hunt.jpeg","title":"Darrien Hunt","desc":""},{"img":"images/8-Desmond_Franklin.jpeg","title":"Desmond Franklin","desc":""},{"img":"images/22-Michael_Brown.jpeg","title":"Michael Brown","desc":""},{"img":"images/27-Philando_Castile.jpeg","title":"Philando Castile","desc":""},{"img":"images/28-Rayshard_Brooks.jpeg","title":"Rayshard Brooks","desc":""},{"img":"images/35-Stephon_Clark.jpeg","title":"Stephon Clark","desc":""}]'>
-        <div class="project-thumb"><img src="images/COVERstm.png" alt="Say Their Names"></div>
-        <p class="project-title">Say Their Names</p><p class="project-tag">Design</p>
-      </div>
       <div class="project-card" onclick="openLightbox(this)" data-project='[{"img":"images/Carfentanil1.jpg","title":"","desc":""},{"img":"images/Carfentanil2.jpg","title":"","desc":""},{"img":"images/Carfentanil3.jpg","title":"","desc":""}]'>
         <div class="project-thumb"><img src="images/Carfentanil1.jpg" alt="What is Carfentanil?"></div>
         <p class="project-title">What is Carfentanil?</p><p class="project-tag">Design</p>
@@ -221,6 +217,12 @@
       <div class="project-card" onclick="openPDF('December24.pdf','December 2024')">
         <div class="project-thumb"><img src="images/December.jpg" alt="December 2024"></div>
         <p class="project-title">December 2024</p><p class="project-tag">Magazine</p>
+      </div>
+
+      <!-- Say Their Names (last) -->
+      <div class="project-card" onclick="openLightbox(this)" data-project='[{"img":"images/COVERstm.png","title":"","desc":""},{"img":"images/34-Samuel_DuBose.jpeg","title":"Samuel DuBose","desc":""},{"img":"images/6-Darrien_Hunt.jpeg","title":"Darrien Hunt","desc":""},{"img":"images/8-Desmond_Franklin.jpeg","title":"Desmond Franklin","desc":""},{"img":"images/22-Michael_Brown.jpeg","title":"Michael Brown","desc":""},{"img":"images/27-Philando_Castile.jpeg","title":"Philando Castile","desc":""},{"img":"images/28-Rayshard_Brooks.jpeg","title":"Rayshard Brooks","desc":""},{"img":"images/35-Stephon_Clark.jpeg","title":"Stephon Clark","desc":""}]'>
+        <div class="project-thumb"><img src="images/COVERstm.png" alt="Say Their Names"></div>
+        <p class="project-title">Say Their Names</p><p class="project-tag">Design</p>
       </div>
 
     </div>
@@ -310,7 +312,7 @@
       <!-- Design Preview (center/main) -->
       <div class="home-main">
         <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:1.25rem;">
-          <h3 style="font-family:'Instrument Serif',serif; font-size:26px; font-weight:400;">Design</h3>
+          <h3 style="font-family:'Instrument Serif',serif; font-size:26px; font-weight:400;">Graphic Design</h3>
           <button onclick="switchTab('design')" style="font-family:'EB Garamond',serif; font-size:13px; color:#888; background:none; border:none; cursor:pointer; text-transform:uppercase; letter-spacing:0.08em; text-decoration:underline;">View all →</button>
         </div>
         <div class="home-project-grid">
@@ -331,8 +333,8 @@
             <p class="project-title">Pride Month Harm Reduction</p><p class="project-tag">Design</p>
           </div>
           <div class="project-card" onclick="switchTab('design')">
-            <div class="project-thumb"><img src="images/COVERstm.png" alt="Say Their Names"></div>
-            <p class="project-title">Say Their Names</p><p class="project-tag">Design</p>
+            <div class="project-thumb"><img src="images/RockTheRow.png" alt="Rock the Row"></div>
+            <p class="project-title">Rock the Row</p><p class="project-tag">Design</p>
           </div>
           <div class="project-card" onclick="switchTab('design')">
             <div class="project-thumb"><img src="images/shroom1.jpg" alt="What are Shrooms?"></div>
@@ -616,7 +618,7 @@
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
     document.getElementById('tab-' + name).classList.add('active');
     document.querySelectorAll('.tab-btn').forEach(b => {
-      if (b.textContent.toLowerCase().trim() === name) b.classList.add('active');
+      if (b.dataset.tab === name) b.classList.add('active');
     });
     if (name === 'articles' && !document.getElementById('articles-grid').hasChildNodes()) buildArticles();
   }
