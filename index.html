@@ -18,7 +18,7 @@
     .hero h1 { font-family: 'Instrument Serif', serif; font-size: 52px; font-weight: 400; line-height: 1.1; }
     .hero p { font-size: 18px; color: #666; line-height: 1.7; margin-top: 0.5rem; }
     .section-label { font-size: 11px; color: #888; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.5rem; }
-    .tab-bar { display: flex; border-bottom: 0.5px solid #ddd; margin-bottom: 3rem; }
+    .tab-bar { display: flex; border-bottom: 0.5px solid #ddd; margin-bottom: 2rem; }
     .tab-btn { font-family: 'EB Garamond', serif; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: #888; background: none; border: none; padding: 0.75rem 1.5rem 0.75rem 0; cursor: pointer; border-bottom: 1.5px solid transparent; margin-bottom: -0.5px; }
     .tab-btn.active { color: #1a1a1a; border-bottom-color: #1a1a1a; }
     .tab-btn:hover { color: #1a1a1a; }
@@ -86,7 +86,7 @@
       .tab-bar { overflow-x: auto; flex-wrap: nowrap; -webkit-overflow-scrolling: touch; scrollbar-width: none; margin-bottom: 2rem; }
       .tab-bar::-webkit-scrollbar { display: none; }
       .tab-btn { flex: 0 0 auto; padding: 0.65rem 0.9rem 0.65rem 0; font-size: 12px; }
-      .home-project-grid { grid-template-columns: repeat(2, 1fr); gap: 0.85rem; }
+      .home-project-grid { grid-template-columns: 1fr; gap: 1.25rem; }
       .home-side { margin-top: 0.5rem; }
       .about { gap: 2rem; margin-bottom: 3rem; }
       .about h2 { font-size: 26px; }
@@ -96,9 +96,6 @@
       .video-play-btn { width: 50px; height: 50px; }
       .social-links { gap: 8px; }
       .social-btn { font-size: 13px; padding: 6px 12px; }
-      .project-card { padding: 0.75rem; }
-      .project-title { font-size: 14px; }
-      .project-tag { font-size: 12px; }
     }
     .skills-wrap { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 0.5rem; }
     .badge { display: inline-block; font-size: 12px; padding: 4px 10px; background: #f2f2f2; border-radius: 99px; color: #555; font-family: 'EB Garamond', serif; }
@@ -167,7 +164,7 @@
     .masonry-item:hover img { opacity: 0.9; }
 
     @media (max-width: 700px) { .grid { grid-template-columns: 1fr 1fr; } .articles-grid { grid-template-columns: 1fr 1fr; } .masonry-grid { columns: 2; } .about { grid-template-columns: 1fr; } .lightbox-stage { padding: 1rem 3.5rem; } .lightbox-arrow.prev { left: 0.5rem; } .lightbox-arrow.next { right: 0.5rem; } }
-    @media (max-width: 480px) { .grid { grid-template-columns: repeat(2, 1fr); } .articles-grid { grid-template-columns: 1fr; } .masonry-grid { columns: 1; } .hero h1 { font-size: 36px; } }
+    @media (max-width: 480px) { .grid { grid-template-columns: 1fr; } .articles-grid { grid-template-columns: 1fr; } .masonry-grid { columns: 1; } .hero h1 { font-size: 36px; } }
   </style>
 </head>
 <body>
@@ -338,8 +335,8 @@
       <!-- Design Preview (center/main) -->
       <div class="home-main">
         <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:1.25rem;">
-          <h3 style="font-family:'Instrument Serif',serif; font-size:26px; font-weight:400;">Graphic Design</h3>
-          <button onclick="switchTab('design')" style="font-family:'EB Garamond',serif; font-size:13px; color:#888; background:none; border:none; cursor:pointer; text-transform:uppercase; letter-spacing:0.08em; text-decoration:underline;">View all →</button>
+          <h3 style="font-family:'Instrument Serif',serif; font-size:32px; font-weight:400;">Graphic Design</h3>
+          <button onclick="switchTab('design')" style="font-family:'EB Garamond',serif; font-size:13px; color:#888; background:none; border:none; cursor:pointer; text-transform:uppercase; letter-spacing:0.08em; text-decoration:none;">View all →</button>
         </div>
         <div class="home-project-grid">
           <div class="project-card" onclick="switchTab('design')">
@@ -372,8 +369,8 @@
       <!-- Articles Preview (sidebar) -->
       <div class="home-side">
         <div class="side-label">
-          <h3 style="font-family:'Instrument Serif',serif; font-size:26px; font-weight:400;">Articles</h3>
-          <button onclick="switchTab('articles')" style="font-family:'EB Garamond',serif; font-size:13px; color:#888; background:none; border:none; cursor:pointer; text-transform:uppercase; letter-spacing:0.08em; text-decoration:underline;">View all →</button>
+          <h3 style="font-family:'Instrument Serif',serif; font-size:32px; font-weight:400;">Articles</h3>
+          <button onclick="switchTab('articles')" style="font-family:'EB Garamond',serif; font-size:13px; color:#888; background:none; border:none; cursor:pointer; text-transform:uppercase; letter-spacing:0.08em; text-decoration:none;">View all →</button>
         </div>
         <div class="side-articles">
           <a href="https://www.uscannenbergmedia.com/2026/04/06/families-left-in-the-dark-ucsd-usc-quietly-sell-donors-bodies-to-navy-for-israeli-military-training/" target="_blank" class="side-article-card">
@@ -480,7 +477,7 @@
     </div>
 
     <!-- About + Skills (bottom) -->
-    <div style="border-top: 0.5px solid #ddd; padding-top: 3rem; margin-top: 1rem;">
+    <div style="border-top: 0.5px solid #ddd; padding-top: 2rem; margin-top: 0.5rem;">
       <div class="about" style="grid-template-columns: 1fr; gap: 1rem; margin-bottom: 2.5rem;">
         <div>
           <h2>About</h2>
