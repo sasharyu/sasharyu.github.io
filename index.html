@@ -74,6 +74,29 @@
     .side-article-pub { font-size: 10px; color: #aaa; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 3px; }
     .side-article-title { font-size: 13.5px; line-height: 1.4; color: #1a1a1a; }
     @media (max-width: 700px) { .home-layout { grid-template-columns: 1fr; gap: 2.5rem; } }
+
+    /* Mobile improvements */
+    @media (max-width: 700px) {
+      .container { padding: 0 1.25rem; }
+      nav { padding: 1.5rem 0 1.25rem; margin-bottom: 2rem; flex-wrap: wrap; gap: 0.75rem; }
+      .nav-links { display: none; }
+      .hero { margin-bottom: 2.5rem; }
+      .hero h1 { font-size: 38px; }
+      .hero p { font-size: 16px; }
+      .tab-bar { overflow-x: auto; flex-wrap: nowrap; -webkit-overflow-scrolling: touch; scrollbar-width: none; margin-bottom: 2rem; }
+      .tab-bar::-webkit-scrollbar { display: none; }
+      .tab-btn { flex: 0 0 auto; padding: 0.65rem 0.9rem 0.65rem 0; font-size: 12px; }
+      .home-project-grid { grid-template-columns: 1fr; gap: 1.25rem; }
+      .home-side { margin-top: 0.5rem; }
+      .about { gap: 2rem; margin-bottom: 3rem; }
+      .about h2 { font-size: 26px; }
+      .side-articles { gap: 1.25rem; }
+    }
+    @media (max-width: 480px) {
+      .video-play-btn { width: 50px; height: 50px; }
+      .social-links { gap: 8px; }
+      .social-btn { font-size: 13px; padding: 6px 12px; }
+    }
     .skills-wrap { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 0.5rem; }
     .badge { display: inline-block; font-size: 12px; padding: 4px 10px; background: #f2f2f2; border-radius: 99px; color: #555; font-family: 'EB Garamond', serif; }
     .social-links { display: flex; gap: 10px; margin-top: 1.5rem; flex-wrap: wrap; }
