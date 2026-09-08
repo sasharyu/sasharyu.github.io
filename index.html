@@ -25,11 +25,6 @@
     .tab-panel { display: none; }
     .tab-panel.active { display: block; }
 
-    /* Design sub-tabs (Design / Flyer) */
-    .design-tab-bar { display: flex; border-bottom: 0.5px solid #ddd; margin-bottom: 2.5rem; }
-    .design-subpanel { display: none; }
-    .design-subpanel.active { display: block; }
-
     /* Social Samples */
     .social-samples-heading { font-family: 'Instrument Serif', serif; font-size: 28px; font-weight: 400; margin: 0 0 1.5rem; }
     .social-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; margin-bottom: 4rem; justify-items: center; }
@@ -206,14 +201,6 @@
 
   <!-- design tab -->
   <div class="tab-panel" id="tab-design">
-
-    <!-- Design sub-tabs -->
-    <div class="design-tab-bar">
-      <button class="tab-btn active" data-designtab="main" onclick="switchDesignTab('main')">Design</button>
-      <button class="tab-btn" data-designtab="flyer" onclick="switchDesignTab('flyer')">Flyer</button>
-    </div>
-
-    <div class="design-subpanel active" id="design-main">
     <div class="grid" style="margin-bottom:4rem;">
 
       <!-- Design projects -->
@@ -260,10 +247,16 @@
         <p class="project-title">December 2024</p><p class="project-tag">Magazine</p>
       </div>
 
-      <!-- Say Their Names (last) -->
+      <!-- Say Their Names -->
       <div class="project-card" onclick="openLightbox(this)" data-project='[{"img":"images/COVERstm.png","title":"","desc":""},{"img":"images/34-Samuel_DuBose.jpeg","title":"Samuel DuBose","desc":""},{"img":"images/6-Darrien_Hunt.jpeg","title":"Darrien Hunt","desc":""},{"img":"images/8-Desmond_Franklin.jpeg","title":"Desmond Franklin","desc":""},{"img":"images/22-Michael_Brown.jpeg","title":"Michael Brown","desc":""},{"img":"images/27-Philando_Castile.jpeg","title":"Philando Castile","desc":""},{"img":"images/28-Rayshard_Brooks.jpeg","title":"Rayshard Brooks","desc":""},{"img":"images/35-Stephon_Clark.jpeg","title":"Stephon Clark","desc":""}]'>
         <div class="project-thumb"><img src="images/COVERstm.png" alt="Say Their Names"></div>
         <p class="project-title">Say Their Names</p><p class="project-tag">Design</p>
+      </div>
+
+      <!-- Flyer (last) -->
+      <div class="project-card" onclick="openLightbox(this)" data-project='[{"img":"images/invitation.jpg","title":"","desc":""}]'>
+        <div class="project-thumb"><img src="images/invitation.jpg" alt="Flyer"></div>
+        <p class="project-title">Flyer</p><p class="project-tag">Design</p>
       </div>
 
     </div>
@@ -296,17 +289,6 @@
         </div>
       </blockquote>
 
-    </div>
-    </div>
-
-    <!-- Flyer sub-tab -->
-    <div class="design-subpanel" id="design-flyer">
-      <div class="grid" style="margin-bottom:4rem;">
-        <div class="project-card" onclick="openLightbox(this)" data-project='[{"img":"images/invitation.jpg","title":"","desc":""}]'>
-          <div class="project-thumb"><img src="images/invitation.jpg" alt="Flyer"></div>
-          <p class="project-title">Flyer</p><p class="project-tag">Design</p>
-        </div>
-      </div>
     </div>
 
   </div>
@@ -721,14 +703,6 @@
     });
     if (name === 'articles' && !document.getElementById('articles-grid').hasChildNodes()) buildArticles();
     if (name === 'design' && window.instgrm) window.instgrm.Embeds.process();
-  }
-
-  function switchDesignTab(name) {
-    document.querySelectorAll('.design-subpanel').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('[data-designtab]').forEach(b => b.classList.remove('active'));
-    document.getElementById('design-' + name).classList.add('active');
-    document.querySelector(`[data-designtab="${name}"]`).classList.add('active');
-    if (name === 'main' && window.instgrm) window.instgrm.Embeds.process();
   }
 
   let slides = [], currentSlide = 0;
