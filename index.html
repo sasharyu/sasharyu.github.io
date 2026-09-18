@@ -164,7 +164,7 @@
     .spread-arrow:disabled { opacity: 0.2; cursor: default; }
 
     /* Masonry photography grid */
-    .masonry-grid { display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 154px; gap: 12px; margin-bottom: 4rem; }
+    .masonry-grid { display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 154px; grid-auto-flow: dense; gap: 12px; margin-bottom: 4rem; }
     .masonry-item, .masonry-featured { grid-row: span 2; border-radius: 8px; overflow: hidden; cursor: pointer; }
     .masonry-item img, .masonry-featured img { width: 100%; height: 100%; display: block; object-fit: cover; transition: opacity 0.2s; }
     .masonry-item:hover img, .masonry-featured:hover img { opacity: 0.9; }
