@@ -169,7 +169,8 @@
     .masonry-item img, .masonry-featured img { width: 100%; height: 100%; display: block; object-fit: cover; transition: opacity 0.2s; }
     .masonry-item:hover img, .masonry-featured:hover img { opacity: 0.9; }
     .span-cols-2 { grid-column: span 2; }
-    .span-rows-2 { grid-row: span 2; }
+    .span-rows-2 { grid-row: span 2; background: #f2f2f2; display: flex; align-items: center; }
+    .span-rows-2 img { height: auto; object-fit: contain; }
 
     @media (max-width: 700px) { .grid { grid-template-columns: 1fr 1fr; } .articles-grid { grid-template-columns: 1fr 1fr; } .masonry-grid { grid-template-columns: repeat(2, 1fr); } .about { grid-template-columns: 1fr; } .lightbox-stage { padding: 1rem 3.5rem; } .lightbox-arrow.prev { left: 0.5rem; } .lightbox-arrow.next { right: 0.5rem; } }
     @media (max-width: 480px) { .grid { grid-template-columns: 1fr; } .articles-grid { grid-template-columns: 1fr; } .masonry-grid { grid-template-columns: 1fr; } .span-cols-2 { grid-column: span 1; } .hero h1 { font-size: 36px; } }
